@@ -2,7 +2,7 @@ package com.caldremch.android.http
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.caldremch.http.core.RequestContextComposite
+import com.caldremch.http.core.framework.RequestContextComposite
 import kotlin.reflect.KClass
 
 /**

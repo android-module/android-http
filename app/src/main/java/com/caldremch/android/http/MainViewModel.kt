@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.HttpManager
-import com.caldremch.http.core.IDialogHandle
-import com.caldremch.http.core.IRequestContext
-import com.caldremch.http.core.IRequestHandle
+import com.caldremch.http.core.framework.handle.IDialogHandle
+import com.caldremch.http.core.framework.handle.IRequestContext
+import com.caldremch.http.core.framework.handle.IRequestHandle
 import com.caldremch.http.core.ext.exec
 
 /**

@@ -12,7 +12,7 @@ import retrofit2.http.*
  * @date 2019-02-22 17:51
  * @describe
  */
-interface Api {
+internal interface Api {
 
     @GET
     @Headers("Content-Type:image/jpeg; charset=utf-8")

@@ -1,4 +1,4 @@
-package com.caldremch.http.exception;
+package com.caldremch.http.exception
 
 /**
  *
@@ -6,19 +6,5 @@ package com.caldremch.http.exception;
  * @date 2019/2/26
  * @Email caldremch@163.com
  * @describe
- *
- **/
-public class ApiHttpException extends RuntimeException {
-
-    private String mMsg;
-    private int mCode;
-    public ApiHttpException(int code, String message){
-        super(message);
-        this.mCode = code;
-    }
-    public int getCode() {
-        return mCode;
-    }
-}
-
-
+ */
+open class ApiHttpException(val code: Int, message: String?) : RuntimeException(message)

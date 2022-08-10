@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.caldremch.android.log.debugLog
-import com.caldremch.http.core.IHandleListener
-import com.caldremch.http.core.android.vm.IHttpEventListenerProvider
+import com.caldremch.http.core.deprecated.observer.IHandleListener
+import com.caldremch.http.core.deprecated.observer.IHttpEventListenerProvider
 import java.lang.ref.WeakReference
 import kotlin.reflect.KClass
 

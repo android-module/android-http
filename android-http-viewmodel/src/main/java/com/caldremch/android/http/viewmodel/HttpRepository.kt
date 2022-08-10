@@ -1,8 +1,8 @@
 package com.caldremch.android.http.viewmodel
 
 import com.caldremch.android.log.debugLog
-import com.caldremch.http.core.IHandleListener
-import com.caldremch.http.core.observer.HttpObservable
+import com.caldremch.http.core.deprecated.observer.IHandleListener
+import com.caldremch.http.core.deprecated.observer.HttpObservable
 
 /**
  * Created by Leon on 2022/7/24.

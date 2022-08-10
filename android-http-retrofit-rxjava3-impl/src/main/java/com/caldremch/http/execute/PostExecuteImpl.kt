@@ -1,14 +1,20 @@
 package com.caldremch.http.execute
 
-import com.caldremch.http.core.*
-import com.caldremch.http.core.observer.HttpObservable
+import com.caldremch.http.core.abs.AbsCallback
+import com.caldremch.http.core.framework.base.IFutureTask
+import com.caldremch.http.core.framework.base.IPostExecute
+import com.caldremch.http.core.framework.PostRequest
+import com.caldremch.http.core.framework.TransferStation
+import com.caldremch.http.core.framework.handle.IDialogHandle
+import com.caldremch.http.core.framework.handle.IRequestHandle
+import com.caldremch.http.core.params.HttpParams
 import com.google.gson.Gson
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
+internal class PostExecuteImpl: BaseExecute(), IPostExecute {
     
     private val gson by lazy { Gson() }
 
@@ -73,7 +79,7 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
 
 
 
-    fun getHttpParamsBody(httpParams: com.caldremch.http.core.HttpParams): RequestBody {
+    fun getHttpParamsBody(httpParams: HttpParams): RequestBody {
         if (httpParams.isEmpty) {
             return "{}".toRequestBody(MEDIA_TYPE_JSON)
         }
@@ -89,7 +95,7 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
     }
 
 
-    fun toJsonString(httpParams: com.caldremch.http.core.HttpParams): String {
+    fun toJsonString(httpParams: HttpParams): String {
         return if (!httpParams.isEmpty) {
             gson.toJson(httpParams.getUrlParamsMap())
         } else "{}"
@@ -98,7 +104,7 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
     override fun <T> asFutureTask(
         request: PostRequest, transferStation: TransferStation, url: String, clazz: Class<T>
     ): IFutureTask<T> {
-        return object : IFutureTask<T>{
+        return object : IFutureTask<T> {
             override fun execute(futureCallback: AbsCallback<T>) {
                 execute(request, transferStation, url, futureCallback, clazz)
             }

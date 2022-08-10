@@ -1,10 +1,15 @@
 package com.caldremch.http.execute
 
-import com.caldremch.http.core.*
-import com.caldremch.http.core.observer.HttpObservable
+import com.caldremch.http.core.abs.AbsCallback
+import com.caldremch.http.core.framework.GetRequest
+import com.caldremch.http.core.framework.base.IFutureTask
+import com.caldremch.http.core.framework.base.IGetExecute
+import com.caldremch.http.core.framework.TransferStation
+import com.caldremch.http.core.framework.handle.IDialogHandle
+import com.caldremch.http.core.framework.handle.IRequestHandle
 
 
-class GetExecuteImpl : BaseExecute(), IGetExecute {
+internal class GetExecuteImpl : BaseExecute(), IGetExecute {
 
     override fun <T> execute(
         request: GetRequest,

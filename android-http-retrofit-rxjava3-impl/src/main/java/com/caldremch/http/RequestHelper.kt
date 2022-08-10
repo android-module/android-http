@@ -8,7 +8,6 @@ import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import com.caldremch.http.log.HttpLoggingInterceptor
 import org.koin.java.KoinJavaComponent
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -27,22 +26,21 @@ import java.util.concurrent.TimeUnit
  *
  **/
 
-class RequestHelper(private val setCustomHeader:Boolean = true) {
+internal class RequestHelper(private val setCustomHeader:Boolean = true) {
 
     private val defualt_timeout = 20L
 
     private val gson: Gson = Gson()
 
-    private var clientBuilder: OkHttpClient.Builder
+    private var clientBuilder: OkHttpClient.Builder =
+        OkHttpClient.Builder().readTimeout(defualt_timeout, TimeUnit.SECONDS)
+            .connectTimeout(defualt_timeout, TimeUnit.SECONDS)
 
     private var retrofit: Retrofit
     private val config: IServerUrlConfig by KoinJavaComponent.inject(IServerUrlConfig::class.java)
     private val commonHeader: IHeader by KoinJavaComponent.inject(IHeader::class.java)
 
     init {
-
-        clientBuilder = OkHttpClient.Builder().readTimeout(defualt_timeout, TimeUnit.SECONDS)
-            .connectTimeout(defualt_timeout, TimeUnit.SECONDS)
 
         if(setCustomHeader){
             clientBuilder.addInterceptor(object : Interceptor {
@@ -58,8 +56,13 @@ class RequestHelper(private val setCustomHeader:Boolean = true) {
             })
         }
 
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val loggingInterceptor = okhttp3.logging.HttpLoggingInterceptor(object :
+            okhttp3.logging.HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                debugLog { message }
+            }
+        })
+        loggingInterceptor.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY)
         clientBuilder.addInterceptor(loggingInterceptor)
 
         val baseUrl = if (config.enableConfig()) config.currentUrl() else config.defaultUrl()
