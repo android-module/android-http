@@ -16,9 +16,12 @@ class MainActivity : AppCompatActivity() {
 
 
 //        HttpManager.post("").put(Any()).exec<Any> {  }
+
+
     }
 
     fun Go(view: View) {
-        startActivity(Intent(this, HttpActivity::class.java))
+//        startActivity(Intent(this, HttpActivity::class.java))
+        HttpManager.post("").put(Any()).exec<Any> {  }
     }
 }

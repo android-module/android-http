@@ -39,3 +39,5 @@ dependencies {
     implementation 'io.github.caldremch:android-logger:1.0.0'
 
 }
+
+apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
