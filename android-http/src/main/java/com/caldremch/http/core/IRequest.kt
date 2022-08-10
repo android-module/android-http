@@ -27,6 +27,7 @@ interface ICancel{
 interface IRequest<out R : IRequest<R>> {
     fun put(key: String, value: Any?): R
     fun path(pathName: String, value: String): R
+    fun showDialog(eventHandle:IHttpDialogEvent): R
     fun disableToast(): R
     fun noCustomerHeader(): R
     fun <T> execute( clazz: Class<T>,callback: AbsCallback<T>)
@@ -36,18 +37,18 @@ interface IRequest<out R : IRequest<R>> {
 
 
 interface ICommonExecute<R>{
-    fun <T> asFutureTask(request: R, url:String, clazz: Class<T>): IFutureTask<T>
-    fun <T> asCancelableFutureTask(request: R, url:String, clazz: Class<T>, httpObservable:HttpObservable?): IFutureTask<T>
+    fun <T> asFutureTask(request: R, transferStation: TransferStation, url:String, clazz: Class<T>): IFutureTask<T>
+    fun <T> asCancelableFutureTask(request: R, transferStation: TransferStation, url:String, clazz: Class<T>, httpObservable:HttpObservable?): IFutureTask<T>
 }
 
 interface IGetExecute : ICommonExecute<GetRequest> {
-    fun <T> execute(request: GetRequest, url:String, callback: AbsCallback<T>, clazz: Class<T>, httpObservable:HttpObservable?)
+    fun <T> execute(request: GetRequest, transferStation: TransferStation, url:String, callback: AbsCallback<T>, clazz: Class<T>, httpObservable:HttpObservable?)
 }
 
 interface IPureGetExecute : IGetExecute
 
 interface IPostExecute : ICommonExecute<PostRequest> {
-    fun <T> execute(request: PostRequest, url:String, callback: AbsCallback<T>, clazz: Class<T>, httpObservable:HttpObservable? )
+    fun <T> execute(request: PostRequest, transferStation: TransferStation,  url:String, callback: AbsCallback<T>, clazz: Class<T>, httpObservable:HttpObservable? )
 }
 
 

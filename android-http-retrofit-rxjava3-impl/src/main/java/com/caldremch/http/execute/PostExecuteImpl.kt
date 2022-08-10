@@ -3,6 +3,7 @@ package com.caldremch.http.execute
 import com.caldremch.http.core.AbsCallback
 import com.caldremch.http.core.IFutureTask
 import com.caldremch.http.core.PostRequest
+import com.caldremch.http.core.TransferStation
 import com.caldremch.http.core.observer.HttpObservable
 import com.google.gson.Gson
 import okhttp3.MediaType
@@ -16,17 +17,18 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
 
     override fun <T> execute(
         request: PostRequest,
+        transferStation: TransferStation,
         url: String,
         callback: AbsCallback<T>,
         clazz: Class<T>,
         httpObservable: HttpObservable?
     ) {
 
-        val formUrlEncoded = request.formUrlEncoded
-        val postQuery = request.postQuery
-        val httpParams = request.httpParams
-        val httpPath = request.httpPath
-        val body: Any? = request.requestBody
+        val formUrlEncoded = transferStation.formUrlEncoded
+        val postQuery = transferStation.postQuery
+        val httpParams = transferStation.httpParams
+        val httpPath = transferStation.httpPath
+        val body: Any? = transferStation.requestBody
 
         val pathUrl =  if(httpPath.isEmpty) url else httpPath.getPathUrl(url)
 
@@ -62,7 +64,7 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
 
         //post json body
         go<T>(
-            api.post(pathUrl, getHttpParamsBody(request.httpParams)),
+            api.post(pathUrl, getHttpParamsBody(transferStation.httpParams)),
             callback,
             clazz,
             httpObservable
@@ -94,20 +96,21 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
     }
 
     override fun <T> asFutureTask(
-        request: PostRequest, url: String, clazz: Class<T>
+        request: PostRequest, transferStation: TransferStation, url: String, clazz: Class<T>
     ): IFutureTask<T> {
-       return asCancelableFutureTask(request, url, clazz, null)
+       return asCancelableFutureTask(request,transferStation, url, clazz, null)
     }
 
     override fun <T> asCancelableFutureTask(
         request: PostRequest,
+        transferStation: TransferStation,
         url: String,
         clazz: Class<T>,
         httpObservable: HttpObservable?
     ): IFutureTask<T> {
         return object : IFutureTask<T>{
             override fun execute(futureCallback: AbsCallback<T>) {
-                execute(request, url, futureCallback, clazz, httpObservable)
+                execute(request,transferStation, url, futureCallback, clazz, httpObservable)
             }
         }
     }

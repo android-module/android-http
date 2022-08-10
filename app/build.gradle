@@ -35,6 +35,8 @@ android {
 dependencies {
     implementation 'io.github.caldremch:android-logger:1.0.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.activity:activity-ktx:1.5.1"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation project(":android-http")
     implementation project(":android-http-viewmodel")

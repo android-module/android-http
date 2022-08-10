@@ -14,31 +14,33 @@ package com.caldremch.http.core
  **/
 abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal var type: Int) :
     IRequest<R>, ILifecycleObserver {
-    val httpParams: HttpParams = HttpParams()
-    val httpPath: HttpPath = HttpPath()
-    protected var isShowToast = true
-     var noCustomerHeader = false
+
+    protected val transferStation by lazy { TransferStation() }
 
     override fun put(key: String, value: Any?): R {
         value?.let {
-            httpParams.put(key, value)
+            transferStation.httpParams.put(key, value)
         }
         return this as R
     }
 
+    override fun showDialog(eventHandle: IHttpDialogEvent): R {
+        transferStation.eventHandle = eventHandle
+        return this as R
+    }
 
     override fun path(pathName: String, value: String): R {
-        httpPath.put(pathName, value)
+        transferStation.httpPath.put(pathName, value)
         return this as R
     }
 
     override fun disableToast(): R {
-        this.isShowToast = false
+        transferStation.isShowToast = false
         return this as R
     }
 
     override fun noCustomerHeader(): R {
-        this.noCustomerHeader = true
+        transferStation.noCustomerHeader = true
         return this as R
     }
 
