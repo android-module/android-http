@@ -19,7 +19,7 @@ import org.koin.java.KoinJavaComponent
  * Created by Leon on 2022/7/8
  */
 
-abstract class BaseExecute : ILifecycleObserver {
+abstract class BaseExecute {
 
 
     val noCustomerHeaderApi: Api
@@ -30,8 +30,6 @@ abstract class BaseExecute : ILifecycleObserver {
     private val convert: IConvert<ResponseBody> by KoinJavaComponent.inject(IConvert::class.java)
     private val obsHandler: IObserverHandler by KoinJavaComponent.inject(IObserverHandler::class.java)
 
-    override fun onCancel() {
-    }
 
 
     fun <T> go(

@@ -8,13 +8,7 @@ import com.caldremch.android.http.viewmodel.HttpViewModel
  */
 
 
-private fun handleLifeCycleCancel(lifecycle: Lifecycle, viewModel: com.caldremch.android.http.viewmodel.HttpViewModel) {
-    lifecycle.addObserver(object : DefaultLifecycleObserver {
-        override fun onDestroy(owner: LifecycleOwner) {
-            viewModel.onCancel()
-        }
-    })
-}
+
 
 //fun <VM : com.caldremch.android.http.viewmodel.HttpViewModel> BaseActivity<VM>.httpViewModels(): Lazy<VM> {
 //

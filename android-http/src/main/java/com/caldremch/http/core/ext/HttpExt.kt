@@ -41,19 +41,11 @@ inline fun <reified RespType> PostRequest.exec(
     })
 }
 
-inline fun <reified RespType> GetRequest.futureTask(httpObservable: HttpObservable? = null): IFutureTask<RespType> {
-    return if (httpObservable == null) {
-        this.asFutureTask(RespType::class.java)
-    } else {
-        this.asCancelableFutureTask(RespType::class.java, httpObservable)
-    }
+inline fun <reified RespType> GetRequest.futureTask(): IFutureTask<RespType> {
+    return this.asFutureTask(RespType::class.java)
 }
 inline fun <reified RespType> PostRequest.futureTask(httpObservable: HttpObservable? = null): IFutureTask<RespType> {
-    return if (httpObservable == null) {
-        this.asFutureTask(RespType::class.java)
-    } else {
-        this.asCancelableFutureTask(RespType::class.java, httpObservable)
-    }
+    return this.asFutureTask(RespType::class.java)
 }
 
 inline fun <reified RespType> IFutureTask<RespType>.futureExec(
@@ -71,7 +63,7 @@ inline fun <reified RespType> IFutureTask<RespType>.futureExec(
     })
 }
 
-
+@Deprecated(message = "remove in future, useless operation")
 inline fun <reified RespType> IFutureTask<RespType>.futureExecLoading(
     crossinline error: ((e: Throwable?) -> Unit) = {},
     crossinline success: ((data: RespType?) -> Unit) = {}

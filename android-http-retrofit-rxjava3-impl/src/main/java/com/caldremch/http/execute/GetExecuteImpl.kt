@@ -4,15 +4,14 @@ import com.caldremch.http.core.*
 import com.caldremch.http.core.observer.HttpObservable
 
 
-class GetExecuteImpl : BaseExecute(), com.caldremch.http.core.IGetExecute {
+class GetExecuteImpl : BaseExecute(), IGetExecute {
 
     override fun <T> execute(
         request: GetRequest,
         transferStation: TransferStation,
         url: String,
         callback: AbsCallback<T>,
-        clazz: Class<T>,
-        httpObservable: HttpObservable?
+        clazz: Class<T>
     ) {
 
         val httpPath = transferStation.httpPath
@@ -46,19 +45,9 @@ class GetExecuteImpl : BaseExecute(), com.caldremch.http.core.IGetExecute {
     override fun <T> asFutureTask(
         request: GetRequest, transferStation: TransferStation, url: String, clazz: Class<T>
     ): IFutureTask<T> {
-        return asCancelableFutureTask(request,transferStation, url, clazz, null)
-    }
-
-    override fun <T> asCancelableFutureTask(
-        request: GetRequest,
-        transferStation: TransferStation,
-        url: String,
-        clazz: Class<T>,
-        httpObservable: HttpObservable?
-    ): IFutureTask<T> {
         return object : IFutureTask<T> {
             override fun execute(futureCallback: AbsCallback<T>) {
-                execute(request,transferStation, url, futureCallback, clazz, httpObservable)
+                execute(request, transferStation, url, futureCallback, clazz)
             }
         }
     }

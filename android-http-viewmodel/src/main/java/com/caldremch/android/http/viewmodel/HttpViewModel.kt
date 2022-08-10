@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.caldremch.android.log.debugLog
-import com.caldremch.http.core.ICancel
 import com.caldremch.http.core.IHandleListener
 import com.caldremch.http.core.android.vm.IHttpEventListenerProvider
 import java.lang.ref.WeakReference
@@ -57,12 +56,7 @@ inline fun <reified Repository : HttpRepository> HttpViewModel.repositorys(
                 //默认获取第一个
                 val correctConstruct = constructs[0];
                 val repo = correctConstruct.newInstance(httpEventProducer.invoke()?.provider()) as T
-                setListener(object : ICancel {
-                    override fun onCancel() {
-                        debugLog { "HttpRepository监听: 执行HttpRepository的取消" }
-                        repo.onCancel()
-                    }
-                })
+
                 return repo
             }
         }
@@ -78,16 +72,12 @@ open class HttpViewModelPageLoad(eventListener: IHandleListener?) : HttpViewMode
 
 }
 
-open class HttpViewModel(eventListener: IHandleListener?) : ViewModel(), ICancel,
+open class HttpViewModel(eventListener: IHandleListener?) : ViewModel(),
     IHttpEventListenerProvider {
 
     private val weak  = WeakReference<IHandleListener>(eventListener)
 
-    private var cancel: ICancel? = null
 
-    fun setListener(cancel: ICancel?) {
-        this.cancel = cancel
-    }
 
     override fun onCleared() {
         super.onCleared()
@@ -100,11 +90,6 @@ open class HttpViewModel(eventListener: IHandleListener?) : ViewModel(), ICancel
 
     override fun provider(): IHandleListener? {
         return weak.get()
-    }
-
-    override fun onCancel() {
-        debugLog { "HttpViewModel--->onCleared 取消网络请求... ${cancel?.javaClass?.name}" }
-        cancel?.onCancel()
     }
 
 }

@@ -17,8 +17,7 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
         transferStation: TransferStation,
         url: String,
         callback: AbsCallback<T>,
-        clazz: Class<T>,
-        httpObservable: HttpObservable?
+        clazz: Class<T>
     ) {
 
         val formUrlEncoded = transferStation.formUrlEncoded
@@ -99,19 +98,9 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
     override fun <T> asFutureTask(
         request: PostRequest, transferStation: TransferStation, url: String, clazz: Class<T>
     ): IFutureTask<T> {
-       return asCancelableFutureTask(request,transferStation, url, clazz, null)
-    }
-
-    override fun <T> asCancelableFutureTask(
-        request: PostRequest,
-        transferStation: TransferStation,
-        url: String,
-        clazz: Class<T>,
-        httpObservable: HttpObservable?
-    ): IFutureTask<T> {
         return object : IFutureTask<T>{
             override fun execute(futureCallback: AbsCallback<T>) {
-                execute(request,transferStation, url, futureCallback, clazz, httpObservable)
+                execute(request, transferStation, url, futureCallback, clazz)
             }
         }
     }

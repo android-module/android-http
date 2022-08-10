@@ -1,7 +1,5 @@
 package com.caldremch.http.core
 
-import com.caldremch.http.core.observer.HttpObservable
-
 /**
  *
  * @author Caldremch
@@ -18,7 +16,6 @@ interface IFutureTask<T>{
     fun execute(futureCallback: AbsCallback<T>)
 }
 
-interface AnyFutureTask : IFutureTask<Any>
 
 interface ICancel{
     fun onCancel()
@@ -30,26 +27,25 @@ interface IRequest<out R : IRequest<R>> {
     fun bindDialogHandle(dialogEventHandle:IDialogHandle): R
     fun bindRequestHandle(requestHandleEvent: IRequestHandle): R
     fun disableToast(): R
+    fun showDialog(message:String): R
     fun noCustomerHeader(): R
     fun <T> execute( clazz: Class<T>,callback: AbsCallback<T>)
     fun <T> asFutureTask( clazz: Class<T>):IFutureTask<T>
-    fun <T> asCancelableFutureTask(clazz: Class<T>,  httpObservable: HttpObservable?):IFutureTask<T>
+
 }
 
 
 interface ICommonExecute<R>{
     fun <T> asFutureTask(request: R, transferStation: TransferStation, url:String, clazz: Class<T>): IFutureTask<T>
-    fun <T> asCancelableFutureTask(request: R, transferStation: TransferStation, url:String, clazz: Class<T>, httpObservable:HttpObservable?): IFutureTask<T>
 }
 
 interface IGetExecute : ICommonExecute<GetRequest> {
-    fun <T> execute(request: GetRequest, transferStation: TransferStation, url:String, callback: AbsCallback<T>, clazz: Class<T>, httpObservable:HttpObservable?)
+    fun <T> execute(request: GetRequest, transferStation: TransferStation, url:String, callback: AbsCallback<T>, clazz: Class<T>)
 }
 
-interface IPureGetExecute : IGetExecute
 
 interface IPostExecute : ICommonExecute<PostRequest> {
-    fun <T> execute(request: PostRequest, transferStation: TransferStation,  url:String, callback: AbsCallback<T>, clazz: Class<T>, httpObservable:HttpObservable? )
+    fun <T> execute(request: PostRequest, transferStation: TransferStation,  url:String, callback: AbsCallback<T>, clazz: Class<T>)
 }
 
 

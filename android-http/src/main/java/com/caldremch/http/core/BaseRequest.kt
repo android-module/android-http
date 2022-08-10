@@ -13,7 +13,7 @@ package com.caldremch.http.core
  *
  **/
 abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal var type: Int) :
-    IRequest<R>, ILifecycleObserver {
+    IRequest<R> {
 
     protected val transferStation by lazy { TransferStation() }
 
@@ -35,6 +35,8 @@ abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal va
     }
 
 
+
+
     override fun path(pathName: String, value: String): R {
         transferStation.httpPath.put(pathName, value)
         return this as R
@@ -45,15 +47,19 @@ abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal va
         return this as R
     }
 
+    override fun showDialog(message: String): R {
+        transferStation.showDialog = true
+        transferStation.dialogTips = message
+        return this as R
+    }
+
     override fun noCustomerHeader(): R {
         transferStation.noCustomerHeader = true
         return this as R
     }
 
 
-    override fun onCancel() {
-        super.onCancel()
-    }
+
 
 }
 

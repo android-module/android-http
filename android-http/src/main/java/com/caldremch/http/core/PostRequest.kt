@@ -1,6 +1,5 @@
 package com.caldremch.http.core
 
-import com.caldremch.http.core.observer.HttpObservable
 import org.koin.java.KoinJavaComponent
 
 
@@ -35,7 +34,7 @@ class PostRequest(url: String) : BaseRequest<PostRequest>(url, Method.POST),
 
 
     override fun <T> execute(clazz: Class<T>, callback: AbsCallback<T>) {
-        request.execute(this, transferStation, url, callback, clazz, null)
+        request.execute(this, transferStation, url, callback, clazz)
     }
 
 
@@ -43,11 +42,5 @@ class PostRequest(url: String) : BaseRequest<PostRequest>(url, Method.POST),
         return request.asFutureTask(this, transferStation, url, clazz)
     }
 
-    override fun <T> asCancelableFutureTask(
-        clazz: Class<T>,
-        httpObservable: HttpObservable?
-    ): IFutureTask<T> {
-        return request.asCancelableFutureTask(this, transferStation, url, clazz, httpObservable)
-    }
 
 }
