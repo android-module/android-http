@@ -27,7 +27,8 @@ interface ICancel{
 interface IRequest<out R : IRequest<R>> {
     fun put(key: String, value: Any?): R
     fun path(pathName: String, value: String): R
-    fun showDialog(eventHandle:IHttpDialogEvent): R
+    fun bindDialogHandle(dialogEventHandle:IDialogHandle): R
+    fun bindRequestHandle(requestHandleEvent: IRequestHandle): R
     fun disableToast(): R
     fun noCustomerHeader(): R
     fun <T> execute( clazz: Class<T>,callback: AbsCallback<T>)

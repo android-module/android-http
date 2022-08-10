@@ -5,11 +5,12 @@ import com.caldremch.http.AbsObserver
 import com.caldremch.http.JavaRxTransform
 import com.caldremch.http.RequestHelper
 import com.caldremch.http.core.AbsCallback
+import com.caldremch.http.core.IDialogHandle
 import com.caldremch.http.core.ILifecycleObserver
+import com.caldremch.http.core.IRequestHandle
 import com.caldremch.http.core.abs.IConvert
 import com.caldremch.http.core.abs.IObserverHandler
 import com.caldremch.http.core.abs.IServerUrlConfig
-import com.caldremch.http.core.observer.HttpObservable
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import org.koin.java.KoinJavaComponent
@@ -37,9 +38,12 @@ abstract class BaseExecute : ILifecycleObserver {
         obs: Observable<ResponseBody>,
         callback: AbsCallback<T>,
         clazz: Class<T>,
-        httpObservable: HttpObservable?
+        dialogEvent: IDialogHandle?,
+        showDialog:Boolean,
+        dialogTips:String,
+        requestHandleEvent: IRequestHandle?,
     ) {
-        val observer = AbsObserver(callback, obsHandler, httpObservable)
+        val observer = AbsObserver(callback, obsHandler, dialogEvent, showDialog, dialogTips, requestHandleEvent)
         obs.compose(JavaRxTransform.transformer(clazz, convert)).subscribe(observer)
     }
 

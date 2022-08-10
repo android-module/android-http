@@ -33,10 +33,6 @@ class PostRequest(url: String) : BaseRequest<PostRequest>(url, Method.POST),
         return this
     }
 
-    override fun showDialog(eventHandle: IHttpDialogEvent): PostRequest {
-        return this
-    }
-
 
     override fun <T> execute(clazz: Class<T>, callback: AbsCallback<T>) {
         request.execute(this, transferStation, url, callback, clazz, null)

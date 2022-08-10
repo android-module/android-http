@@ -3,15 +3,15 @@ package com.caldremch.http.core
 /**
  * Created by Leon on 2022/7/10
  */
-interface IHttpDialogEvent{
-    fun dialogShowTiming(){}
+interface IDialogHandle{
+    fun dialogShowTiming(dialogTips:String) {}
     fun dialogDismissTiming(){}
 }
 
 /**
  * Created by Leon on 2022/7/10
  */
-interface IHttpEventListener: IHttpDialogEvent{
+interface IHandleListener: IDialogHandle{
     interface CancelProvider{
         fun onCancel()
     }

@@ -1,9 +1,6 @@
 package com.caldremch.http.execute
 
-import com.caldremch.http.core.AbsCallback
-import com.caldremch.http.core.GetRequest
-import com.caldremch.http.core.IFutureTask
-import com.caldremch.http.core.TransferStation
+import com.caldremch.http.core.*
 import com.caldremch.http.core.observer.HttpObservable
 
 
@@ -20,13 +17,18 @@ class GetExecuteImpl : BaseExecute(), com.caldremch.http.core.IGetExecute {
 
         val httpPath = transferStation.httpPath
         val noCustomerHeader = transferStation.noCustomerHeader
+        val showDialog = transferStation.showDialog
+        val dialogTips = transferStation.dialogTips
+        val dialogHandle: IDialogHandle? =  transferStation.dialogHandle
+        val requestHandle: IRequestHandle? = transferStation.requestHandle
+
         val pathUrl = if (httpPath.isEmpty) url else httpPath.getPathUrl(url)
         if (transferStation.httpParams.isEmpty) {
             go(
                 if (noCustomerHeader) noCustomerHeaderApi.get(pathUrl) else api.get(pathUrl),
                 callback,
                 clazz,
-                httpObservable
+                dialogHandle,showDialog, dialogTips, requestHandle
             )
         } else {
             go(
@@ -36,7 +38,7 @@ class GetExecuteImpl : BaseExecute(), com.caldremch.http.core.IGetExecute {
                 ) else api.get(pathUrl, transferStation.httpParams.urlParams),
                 callback,
                 clazz,
-                httpObservable
+                dialogHandle,showDialog, dialogTips, requestHandle
             )
         }
     }

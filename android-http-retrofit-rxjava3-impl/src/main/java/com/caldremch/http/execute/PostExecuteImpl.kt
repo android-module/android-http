@@ -1,9 +1,6 @@
 package com.caldremch.http.execute
 
-import com.caldremch.http.core.AbsCallback
-import com.caldremch.http.core.IFutureTask
-import com.caldremch.http.core.PostRequest
-import com.caldremch.http.core.TransferStation
+import com.caldremch.http.core.*
 import com.caldremch.http.core.observer.HttpObservable
 import com.google.gson.Gson
 import okhttp3.MediaType
@@ -29,6 +26,10 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
         val httpParams = transferStation.httpParams
         val httpPath = transferStation.httpPath
         val body: Any? = transferStation.requestBody
+        val showDialog = transferStation.showDialog
+        val dialogTips = transferStation.dialogTips
+        val dialogHandle: IDialogHandle? =  transferStation.dialogHandle
+        val requestHandle: IRequestHandle? = transferStation.requestHandle
 
         val pathUrl =  if(httpPath.isEmpty) url else httpPath.getPathUrl(url)
 
@@ -40,25 +41,25 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
             } else {
                 requestBody = gson.toJson(body).toRequestBody(MEDIA_TYPE_JSON)
             }
-            go<T>(api.post(pathUrl, requestBody), callback, clazz, httpObservable)
+            go<T>(api.post(pathUrl, requestBody), callback, clazz, dialogHandle,showDialog, dialogTips, requestHandle)
             return
         }
 
         //post 空 body
         if (httpParams.isEmpty) {
-            go<T>(api.post(pathUrl, getHttpParamsBody(httpParams)), callback, clazz, httpObservable)
+            go<T>(api.post(pathUrl, getHttpParamsBody(httpParams)), callback, clazz,  dialogHandle,showDialog, dialogTips, requestHandle)
             return
         }
 
         //post formUrlEncoded
         if (formUrlEncoded) {
-            go<T>(api.post(pathUrl, httpParams.urlParams), callback, clazz, httpObservable)
+            go<T>(api.post(pathUrl, httpParams.urlParams), callback, clazz,  dialogHandle,showDialog, dialogTips, requestHandle)
             return
         }
 
         //post动态链接 url后面拼接 key/value
         if (postQuery) {
-            go<T>(api.postQuery(pathUrl, httpParams.urlParams), callback, clazz, httpObservable)
+            go<T>(api.postQuery(pathUrl, httpParams.urlParams), callback, clazz,  dialogHandle,showDialog, dialogTips, requestHandle)
             return
         }
 
@@ -67,7 +68,7 @@ class PostExecuteImpl: BaseExecute(), com.caldremch.http.core.IPostExecute {
             api.post(pathUrl, getHttpParamsBody(transferStation.httpParams)),
             callback,
             clazz,
-            httpObservable
+            dialogHandle,showDialog, dialogTips, requestHandle
         )
     }
 

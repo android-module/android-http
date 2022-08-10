@@ -5,20 +5,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.HttpManager
-import com.caldremch.http.core.IHttpDialogEvent
+import com.caldremch.http.core.IDialogHandle
+import com.caldremch.http.core.IRequestContext
+import com.caldremch.http.core.IRequestHandle
 import com.caldremch.http.core.ext.exec
 
 /**
  * Created by Leon on 2022/8/8.
  */
 
-open class BaseHttpViewModel : ViewModel(), IHttpDialogEvent {
+open class BaseViewModel : ViewModel(), IDialogHandle, IRequestHandle {
 
-    val _dialogEvent = MutableLiveData<Boolean>()
+   private val _dialogEvent = MutableLiveData<Boolean>()
     val dialogEvent: LiveData<Boolean>
         get() = _dialogEvent
 
-    override fun dialogShowTiming() {
+    private  val _requestContext = MutableLiveData<IRequestContext>()
+    val requestContext: LiveData<IRequestContext>
+        get() = _requestContext
+
+    override fun dialogShowTiming(dialogTips: String) {
         _dialogEvent.postValue(true)
     }
 
@@ -31,9 +37,13 @@ open class BaseHttpViewModel : ViewModel(), IHttpDialogEvent {
         val a = 1;
         debugLog { "onCleared  ${a}" }
     }
+
+    override fun onRequestHandle(ctx: IRequestContext) {
+        _requestContext.postValue(ctx)
+    }
 }
 
-class MainViewModel : BaseHttpViewModel() {
+class MainViewModel : BaseViewModel() {
 
     fun getData() {
 
@@ -43,9 +53,9 @@ class MainViewModel : BaseHttpViewModel() {
         super.onCleared()
         val a = 1;
         debugLog { "onCleared ${a}" }
-
         HttpManager.post("url")
-            .showDialog(this)
+            .bindDialogHandle(this)
+            .bindRequestHandle(this)
             .exec<Any> { }
     }
 

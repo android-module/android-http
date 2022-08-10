@@ -13,9 +13,9 @@ package com.caldremch.http.core.abs
  *
  **/
 interface IObserverHandler {
-    fun onInit() {}
-    fun onNext(data: Any?) {}
+    fun onStart() {}
+    fun onSuccess(data: Any?) {}
     //用户处理错误
     fun onError(e: Throwable)
-    fun onComplete() {}
+    fun onEnd() {}
 }

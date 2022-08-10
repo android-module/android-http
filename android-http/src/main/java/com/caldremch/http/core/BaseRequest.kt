@@ -24,10 +24,16 @@ abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal va
         return this as R
     }
 
-    override fun showDialog(eventHandle: IHttpDialogEvent): R {
-        transferStation.eventHandle = eventHandle
+    override fun bindDialogHandle(dialogEventHandle: IDialogHandle): R {
+        transferStation.dialogHandle = dialogEventHandle
         return this as R
     }
+
+    override fun bindRequestHandle(requestHandleEvent: IRequestHandle):  R {
+        transferStation.requestHandle = requestHandleEvent
+        return this as R
+    }
+
 
     override fun path(pathName: String, value: String): R {
         transferStation.httpPath.put(pathName, value)

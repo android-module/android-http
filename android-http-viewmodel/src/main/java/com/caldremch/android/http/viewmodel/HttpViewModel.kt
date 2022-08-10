@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.ICancel
-import com.caldremch.http.core.IHttpEventListener
+import com.caldremch.http.core.IHandleListener
 import com.caldremch.http.core.android.vm.IHttpEventListenerProvider
 import java.lang.ref.WeakReference
 import kotlin.reflect.KClass
@@ -70,7 +70,7 @@ inline fun <reified Repository : HttpRepository> HttpViewModel.repositorys(
     return RepositoryLazy(Repository::class, defaultFactory)
 }
 
-open class HttpViewModelPageLoad(eventListener: IHttpEventListener?) : HttpViewModel(eventListener) {
+open class HttpViewModelPageLoad(eventListener: IHandleListener?) : HttpViewModel(eventListener) {
 
     protected val _loadDataSuccess = MutableLiveData<Boolean>()
     val loadDataSuccess: LiveData<Boolean>
@@ -78,10 +78,10 @@ open class HttpViewModelPageLoad(eventListener: IHttpEventListener?) : HttpViewM
 
 }
 
-open class HttpViewModel(eventListener: IHttpEventListener?) : ViewModel(), ICancel,
+open class HttpViewModel(eventListener: IHandleListener?) : ViewModel(), ICancel,
     IHttpEventListenerProvider {
 
-    private val weak  = WeakReference<IHttpEventListener>(eventListener)
+    private val weak  = WeakReference<IHandleListener>(eventListener)
 
     private var cancel: ICancel? = null
 
@@ -98,7 +98,7 @@ open class HttpViewModel(eventListener: IHttpEventListener?) : ViewModel(), ICan
 
     }
 
-    override fun provider(): IHttpEventListener? {
+    override fun provider(): IHandleListener? {
         return weak.get()
     }
 

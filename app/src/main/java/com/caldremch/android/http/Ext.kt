@@ -16,20 +16,20 @@ private fun handleLifeCycleCancel(lifecycle: Lifecycle, viewModel: com.caldremch
     })
 }
 
-fun <VM : com.caldremch.android.http.viewmodel.HttpViewModel> BaseActivity<VM>.httpViewModels(): Lazy<VM> {
-
-
-    val httpFactory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-
-            val constructor = modelClass.constructors[0]
-            val realViewModel = constructor.newInstance() as T
-            return realViewModel
-        }
-    }
-
-    val factoryPromise = {
-        httpFactory
-    }
-    return ViewModelLazy(getVMClass(), { viewModelStore }, factoryPromise)
-}
+//fun <VM : com.caldremch.android.http.viewmodel.HttpViewModel> BaseActivity<VM>.httpViewModels(): Lazy<VM> {
+//
+//
+//    val httpFactory = object : ViewModelProvider.Factory {
+//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//
+//            val constructor = modelClass.constructors[0]
+//            val realViewModel = constructor.newInstance() as T
+//            return realViewModel
+//        }
+//    }
+//
+//    val factoryPromise = {
+//        httpFactory
+//    }
+//    return ViewModelLazy(getVMClass(), { viewModelStore }, factoryPromise)
+//}

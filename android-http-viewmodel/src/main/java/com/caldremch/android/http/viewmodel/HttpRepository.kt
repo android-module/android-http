@@ -1,9 +1,8 @@
 package com.caldremch.android.http.viewmodel
 
 import com.caldremch.android.log.debugLog
-import com.caldremch.http.core.IHttpEventListener
+import com.caldremch.http.core.IHandleListener
 import com.caldremch.http.core.observer.HttpObservable
-import java.util.*
 
 /**
  * Created by Leon on 2022/7/24.
@@ -12,7 +11,7 @@ import java.util.*
  */
 
 
-open class HttpRepository(private val httpEvent: IHttpEventListener?) : HttpObservable() {
+open class HttpRepository(private val httpEvent: IHandleListener?) : HttpObservable() {
 
     fun onCancel() {
         debugLog { "${this.javaClass.name}--->取消网络请求..." }
@@ -21,7 +20,7 @@ open class HttpRepository(private val httpEvent: IHttpEventListener?) : HttpObse
         notifyObservers()
     }
 
-    override fun getHttpEventListener(): IHttpEventListener? {
+    override fun getHttpEventListener(): IHandleListener? {
         return httpEvent
     }
 }

@@ -2,16 +2,17 @@ package com.caldremch.http.core.observer;
 
 import androidx.annotation.Nullable;
 
-import com.caldremch.http.core.IHttpEventListener;
+import com.caldremch.http.core.IHandleListener;
 
 import java.util.Vector;
 
 /**
  * Created by Leon on 2022/7/24.
  */
+@Deprecated
 public class HttpObservable {
 
-    public @Nullable IHttpEventListener getHttpEventListener(){
+    public @Nullable IHandleListener getHttpEventListener(){
         return null;
     }
 
