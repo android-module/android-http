@@ -23,8 +23,9 @@ internal class GetExecuteImpl : BaseExecute(), IGetExecute {
         val noCustomerHeader = transferStation.noCustomerHeader
         val showDialog = transferStation.showDialog
         val dialogTips = transferStation.dialogTips
-        val dialogHandle: IDialogHandle? =  transferStation.dialogHandle
-        val requestHandle: IRequestHandle? = transferStation.requestHandle
+        val dialogHandle =  transferStation.dialogHandle
+        val requestHandle = transferStation.requestHandle
+        val isShowToast = transferStation.isShowToast
 
         val pathUrl = if (httpPath.isEmpty) url else httpPath.getPathUrl(url)
         if (transferStation.httpParams.isEmpty) {
@@ -32,7 +33,8 @@ internal class GetExecuteImpl : BaseExecute(), IGetExecute {
                 if (noCustomerHeader) noCustomerHeaderApi.get(pathUrl) else api.get(pathUrl),
                 callback,
                 clazz,
-                dialogHandle,showDialog, dialogTips, requestHandle
+                dialogHandle, showDialog, dialogTips, requestHandle,
+                isShowToast
             )
         } else {
             go(
@@ -42,7 +44,8 @@ internal class GetExecuteImpl : BaseExecute(), IGetExecute {
                 ) else api.get(pathUrl, transferStation.httpParams.urlParams),
                 callback,
                 clazz,
-                dialogHandle,showDialog, dialogTips, requestHandle
+                dialogHandle, showDialog, dialogTips, requestHandle,
+                isShowToast
             )
         }
     }

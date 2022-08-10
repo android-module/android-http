@@ -39,8 +39,17 @@ internal abstract class BaseExecute {
         showDialog:Boolean,
         dialogTips:String,
         requestHandleEvent: IRequestHandle?,
+        showToast:Boolean
     ) {
-        val observer = RxJavaObserver(callback, obsHandler, dialogEvent, showDialog, dialogTips, requestHandleEvent)
+        val observer = RxJavaObserver(
+            callback,
+            obsHandler,
+            dialogEvent,
+            showDialog,
+            dialogTips,
+            requestHandleEvent,
+            showToast
+            )
         obs.compose(JavaRxTransform.transformer(clazz, convert)).subscribe(observer)
     }
 

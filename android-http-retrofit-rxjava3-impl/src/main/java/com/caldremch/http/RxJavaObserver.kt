@@ -22,15 +22,16 @@ import io.reactivex.rxjava3.disposables.Disposable
  **/
 internal class RxJavaObserver<T>(
     private val callback: AbsCallback<T>?,
-    private val handler: ICommonRequestEventCallback?,
+    private val commonRequestEvent: ICommonRequestEventCallback?,
     private val dialogEvent: IDialogHandle?,
     private val showDialog:Boolean,
     private val dialogTips:String,
     private val requestHandleEvent: IRequestHandle?,
+    private val showToast:Boolean
 ) : Observer<T> {
 
     init {
-        handler?.onStart()
+        commonRequestEvent?.onStart()
         if(showDialog){
             dialogEvent?.dialogShowTiming(dialogTips)
         }
@@ -48,12 +49,12 @@ internal class RxJavaObserver<T>(
     }
 
     override fun onNext(t: T) {
-        handler?.onSuccess(t)
+        commonRequestEvent?.onSuccess(t)
         callback?.onSuccess(t)
         if (showDialog) {
             dialogEvent?.dialogDismissTiming()
         }
-        handler?.onEnd()
+        commonRequestEvent?.onEnd()
     }
 
     override fun onError(e: Throwable) {
@@ -67,12 +68,13 @@ internal class RxJavaObserver<T>(
          */
         if (e is NullDataSuccessException) {
             callback?.onSuccess(null)
+            commonRequestEvent?.onEnd()
             return
         }
 
         callback?.onError(e)
-        handler?.onError(e)
-        handler?.onEnd()
+        commonRequestEvent?.onError(e, showToast)
+        commonRequestEvent?.onEnd()
     }
 
 

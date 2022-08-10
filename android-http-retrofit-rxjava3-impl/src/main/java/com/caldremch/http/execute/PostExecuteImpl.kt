@@ -35,6 +35,7 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
         val dialogTips = transferStation.dialogTips
         val dialogHandle: IDialogHandle? =  transferStation.dialogHandle
         val requestHandle: IRequestHandle? = transferStation.requestHandle
+        val isShowToast = transferStation.isShowToast
 
         val pathUrl =  if(httpPath.isEmpty) url else httpPath.getPathUrl(url)
 
@@ -46,25 +47,61 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
             } else {
                 requestBody = gson.toJson(body).toRequestBody(MEDIA_TYPE_JSON)
             }
-            go<T>(api.post(pathUrl, requestBody), callback, clazz, dialogHandle,showDialog, dialogTips, requestHandle)
+            go<T>(
+                api.post(pathUrl, requestBody),
+                callback,
+                clazz,
+                dialogHandle,
+                showDialog,
+                dialogTips,
+                requestHandle,
+                isShowToast
+            )
             return
         }
 
         //post 空 body
         if (httpParams.isEmpty) {
-            go<T>(api.post(pathUrl, getHttpParamsBody(httpParams)), callback, clazz,  dialogHandle,showDialog, dialogTips, requestHandle)
+            go<T>(
+                api.post(pathUrl, getHttpParamsBody(httpParams)),
+                callback,
+                clazz,
+                dialogHandle,
+                showDialog,
+                dialogTips,
+                requestHandle,
+                isShowToast
+            )
             return
         }
 
         //post formUrlEncoded
         if (formUrlEncoded) {
-            go<T>(api.post(pathUrl, httpParams.urlParams), callback, clazz,  dialogHandle,showDialog, dialogTips, requestHandle)
+            go<T>(
+                api.post(pathUrl, httpParams.urlParams),
+                callback,
+                clazz,
+                dialogHandle,
+                showDialog,
+                dialogTips,
+                requestHandle,
+                isShowToast
+            )
             return
         }
 
         //post动态链接 url后面拼接 key/value
         if (postQuery) {
-            go<T>(api.postQuery(pathUrl, httpParams.urlParams), callback, clazz,  dialogHandle,showDialog, dialogTips, requestHandle)
+            go<T>(
+                api.postQuery(pathUrl, httpParams.urlParams),
+                callback,
+                clazz,
+                dialogHandle,
+                showDialog,
+                dialogTips,
+                requestHandle,
+                isShowToast
+            )
             return
         }
 
@@ -73,7 +110,8 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
             api.post(pathUrl, getHttpParamsBody(transferStation.httpParams)),
             callback,
             clazz,
-            dialogHandle,showDialog, dialogTips, requestHandle
+            dialogHandle, showDialog, dialogTips, requestHandle,
+            isShowToast
         )
     }
 
