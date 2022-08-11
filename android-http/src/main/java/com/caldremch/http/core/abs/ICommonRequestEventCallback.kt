@@ -16,6 +16,6 @@ interface ICommonRequestEventCallback {
     fun onStart() {}
     fun onSuccess(data: Any?) {}
     //用户处理错误
-    fun onError(e: Throwable, showToast:Boolean)
+    fun onError(e: Throwable, showToast:Boolean){}
     fun onEnd() {}
 }

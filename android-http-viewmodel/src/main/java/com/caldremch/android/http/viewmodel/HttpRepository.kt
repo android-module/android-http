@@ -10,7 +10,6 @@ import com.caldremch.http.core.deprecated.observer.HttpObservable
  * 是一个被订阅的Repository, 被订阅者, 一旦发生变动, 通知所有的订阅者
  */
 
-
 open class HttpRepository(private val httpEvent: IHandleListener?) : HttpObservable() {
 
     fun onCancel() {
