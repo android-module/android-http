@@ -40,4 +40,11 @@ dependencies {
 
 }
 
+ext {
+    myLibraryVersion=android_http_version
+    myLibraryName="android-http"
+    myArtifactId="android-http"
+    myLibraryDescription="http request framework"
+}
+
 apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
