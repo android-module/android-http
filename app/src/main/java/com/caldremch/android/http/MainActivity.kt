@@ -13,6 +13,7 @@ import com.caldremch.common.utils.startActivity
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.abs.IHeader
 import com.caldremch.http.core.abs.IServerUrlConfig
+import com.caldremch.http.impl.IConvertStrategy
 import com.caldremch.http.koinHttpModules
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.factoryOf
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         DebugLogInitializer.init(true)
+
+        //业务端实现加载
         startKoin {
             modules(koinHttpModules)
             modules(module {
@@ -31,7 +34,10 @@ class MainActivity : AppCompatActivity() {
                 factoryOf<ICommonRequestEventCallback> {
                     HttpObsHandlerImpl()
                 }
-                factory<IHttpDialogEvent> { (context : Context) -> HttpDialogEventImpl(context) }
+                factoryOf<IConvertStrategy> {
+                    ConvertStrategyImpl()
+                }
+                factory<IHttpDialogEvent> { (context: Context) -> HttpDialogEventImpl(context) }
                 singleOf<IServerUrlConfig> { HttpUrlConfigImpl() }
             })
         }

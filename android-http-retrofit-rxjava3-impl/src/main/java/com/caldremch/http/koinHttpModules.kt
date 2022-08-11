@@ -14,6 +14,7 @@ import org.koin.dsl.module
 
 /**
  * Created by Leon on 2022/7/8
+ * 框架内部实现的加载
  */
 val koinHttpModules = module {
     scope<HttpManager> {
@@ -21,6 +22,4 @@ val koinHttpModules = module {
         factoryOf<IPostExecute> { PostExecuteImpl() }
         factoryOf<IConvert<ResponseBody>> { HttpConvertImpl() }
     }
-
-
 }
