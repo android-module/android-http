@@ -10,7 +10,7 @@ import java.io.FileOutputStream
 /**
  * Created by Leon on 2022/8/4.
  */
-object HttpConvertUtils {
+internal object HttpConvertUtils {
 
     fun convertToFile(context: Context, body: ResponseBody?): File {
         val httpFileDir = context.externalCacheDir?.absolutePath + "/httpcache"

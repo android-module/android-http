@@ -10,7 +10,7 @@ import org.koin.java.KoinJavaComponent.inject
 /**
  * Created by Leon on 2022/7/5
  */
-class HttpConvertImpl : IConvert<ResponseBody> {
+internal class HttpConvertImpl : IConvert<ResponseBody> {
 
     private val convertStrategy:IConvertStrategy by inject(IConvertStrategy::class.java)
 

@@ -11,7 +11,6 @@ import java.io.File
 class HttpParams {
    private var urlParamsMap: MutableMap<String, Any> = mutableMapOf()
 
-
     fun getUrlParamsMap():MutableMap<String, Any> {
        return urlParamsMap
     }
