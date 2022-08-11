@@ -32,12 +32,13 @@ android {
 
 dependencies {
     implementation('io.insert-koin:koin-android:3.2.0')
-    implementation "androidx.activity:activity-ktx:1.5.0"
-    implementation "androidx.fragment:fragment-ktx:1.5.0"
+    implementation "androidx.activity:activity-ktx:1.5.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.1"
     implementation 'io.github.caldremch:android-logger:1.0.0'
     implementation 'io.github.caldremch:android-logger:1.0.0'
-    api 'io.github.caldremch:android-common:1.0.0'
-    implementation project(":android-http")
+    implementation 'io.github.caldremch:android-common:1.0.0'
+//    implementation project(":android-http")
+    implementation "io.github.caldremch:android-http:$android_http_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -45,3 +46,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
+
+
+
+ext {
+    myLibraryVersion=android_http_viewmodel_version
+    myLibraryName="android-http-viewmodel"
+    myArtifactId="android-http-viewmodel"
+    myLibraryDescription="android-http-viewmodel"
+}
+
+apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
