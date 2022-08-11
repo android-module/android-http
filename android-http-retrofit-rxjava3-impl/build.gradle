@@ -33,8 +33,9 @@ def versions_okhttp3 = "4.8.1"
 dependencies {
 
     implementation('io.insert-koin:koin-core:3.2.0')
-    api project(":android-http")
+//    api project(":android-http")
     implementation 'io.github.caldremch:android-logger:1.0.0'
+    implementation "io.github.caldremch:android-http:$android_http_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     testImplementation 'junit:junit:4.13.2'
@@ -53,7 +54,7 @@ dependencies {
 
 
 ext {
-    myLibraryVersion="1.0.0"
+    myLibraryVersion=android_http_impl_version
     myLibraryName="android-http-retrofit-rxjava3"
     myArtifactId="android-http-retrofit-rxjava3"
     myLibraryDescription="http request framework implementation"
