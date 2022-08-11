@@ -16,7 +16,6 @@ fun <VM : HttpViewModel> BaseHttpViewModelFragment<VM>.httpViewModels(): Lazy<VM
                 debugLog { "当前的modelClass名字: ${modelClass.name}" }
                 val constructor = modelClass.constructors[0]
                 val realViewModel = constructor.newInstance() as T
-                handleLifeCycleCancel(lifecycle, realViewModel as HttpViewModel)
                 return realViewModel
             }
         }
@@ -28,23 +27,12 @@ fun <VM : HttpViewModel> BaseHttpViewModelFragment<VM>.httpViewModels(): Lazy<VM
     )
 }
 
-
-private fun handleLifeCycleCancel(lifecycle: Lifecycle, viewModel: HttpViewModel) {
-    lifecycle.addObserver(object : DefaultLifecycleObserver {
-        override fun onDestroy(owner: LifecycleOwner) {
-            debugLog { "ViewModel扩展: 生命周期监听: onDestroy" }
-
-        }
-    })
-}
-
 fun <VM : HttpViewModel> BaseHttpViewModelActivity<VM>.httpViewModels(): Lazy<VM> {
 
     val httpFactory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val constructor = modelClass.constructors[0]
             val realViewModel = constructor.newInstance() as T
-            handleLifeCycleCancel(lifecycle, realViewModel as HttpViewModel)
             return realViewModel
         }
     }

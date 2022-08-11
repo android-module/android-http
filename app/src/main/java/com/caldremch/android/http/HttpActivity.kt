@@ -11,12 +11,15 @@ class HttpActivity : BaseHttpViewModelActivity<MainViewModel>() {
         return MainViewModel::class
     }
 
-
     override val layoutId: Int
-        get() = R.layout.activity_main
+        get() = R.layout.activity_http
 
     fun Go(view: View) {
-        HttpManager.post("").put(Any()).exec<Any> {  }
+        viewModel.getData()
+    }
+
+    fun Close(view: View) {
+        finish()
     }
 
 }

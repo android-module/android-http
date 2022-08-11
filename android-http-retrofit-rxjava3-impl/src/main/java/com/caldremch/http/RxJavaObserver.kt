@@ -1,5 +1,6 @@
 package com.caldremch.http
 
+import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.framework.handle.IDialogHandle
@@ -39,6 +40,7 @@ internal class RxJavaObserver<T>(
     private class DisposableAdapter(private val d: Disposable) : IRequestContext {
         override fun cancel() {
             if(d.isDisposed.not()){
+                debugLog{"释放请求"}
                 d.dispose()
             }
         }

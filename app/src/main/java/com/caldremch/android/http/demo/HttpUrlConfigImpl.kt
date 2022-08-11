@@ -13,10 +13,10 @@ class HttpUrlConfigImpl : IServerUrlConfig {
     }
 
     override fun currentUrl(): String {
-        return "http://google.com/"
+        return "https://google.com/"
     }
 
     override fun defaultUrl(): String {
-        return "http://google.com/"
+        return "https:///google.com/"
     }
 }

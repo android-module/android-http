@@ -15,10 +15,11 @@ import com.caldremch.http.core.ext.exec
  * Created by Leon on 2022/8/8.
  */
 class MainViewModel : HttpViewModel() {
-     fun getData() {
+    fun getData() {
         HttpManager.post("url")
             .bindDialogHandle(this)
             .bindRequestHandle(this)
+            .showDialog("Loading...")
             .exec<Any> { }
     }
 

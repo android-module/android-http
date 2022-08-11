@@ -40,8 +40,6 @@ abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal va
     }
 
 
-
-
     override fun path(pathName: String, value: String): R {
         transferStation.httpPath.put(pathName, value)
         return this as R
