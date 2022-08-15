@@ -13,12 +13,12 @@ class HttpUrlConfigImpl : IServerUrlConfig {
     }
 
     override fun currentUrl(): String {
-        return "https://baidu.com/"
-//        return "https://google.com/"  //timeout
+//        return "https://baidu.com/"
+        return "https://google.com/"  //timeout
     }
 
     override fun defaultUrl(): String {
-        return "https:///baidu.com/"
-        //        return "https://google.com/"  //timeout
+//        return "https:///baidu.com/"
+                return "https://google.com/"  //timeout
     }
 }

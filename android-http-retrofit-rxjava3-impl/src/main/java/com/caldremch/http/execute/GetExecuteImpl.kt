@@ -5,6 +5,7 @@ import com.caldremch.http.core.framework.GetRequest
 import com.caldremch.http.core.framework.base.IFutureTask
 import com.caldremch.http.core.framework.base.IGetExecute
 import com.caldremch.http.core.framework.TransferStation
+import com.caldremch.http.core.framework.base.IFullFutureTask
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestHandle
 
@@ -54,6 +55,29 @@ internal class GetExecuteImpl : BaseExecute(), IGetExecute {
         request: GetRequest, transferStation: TransferStation, url: String, clazz: Class<T>
     ): IFutureTask<T> {
         return object : IFutureTask<T> {
+            override fun execute(futureCallback: AbsCallback<T>) {
+                execute(request, transferStation, url, futureCallback, clazz)
+            }
+        }
+    }
+
+    override fun <T> asFullFutureTask(
+        request: GetRequest,
+        transferStation: TransferStation,
+        url: String,
+        clazz: Class<T>
+    ): IFullFutureTask<T> {
+        return object : IFullFutureTask<T>() {
+            override fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T> {
+                transferStation.dialogHandle = dialogEventHandle
+                return this
+            }
+
+            override fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T> {
+                transferStation.requestHandle = requestHandleEvent
+                return this
+            }
+
             override fun execute(futureCallback: AbsCallback<T>) {
                 execute(request, transferStation, url, futureCallback, clazz)
             }

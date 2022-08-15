@@ -17,6 +17,7 @@ interface IRequest<out R : IRequest<R>> {
     fun noCustomerHeader(): R
     fun <T> execute( clazz: Class<T>,callback: AbsCallback<T>)
     fun <T> asFutureTask( clazz: Class<T>): IFutureTask<T>
+    fun <T> asFullFutureTask( clazz: Class<T>): IFullFutureTask<T>
 
 }
 

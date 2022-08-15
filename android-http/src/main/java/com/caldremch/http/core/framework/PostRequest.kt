@@ -1,6 +1,7 @@
 package com.caldremch.http.core.framework
 
 import com.caldremch.http.core.abs.AbsCallback
+import com.caldremch.http.core.framework.base.IFullFutureTask
 import com.caldremch.http.core.framework.base.IFutureTask
 import com.caldremch.http.core.framework.base.IPostExecute
 import com.caldremch.http.core.framework.base.IPostRequest
@@ -45,6 +46,10 @@ class PostRequest(url: String) : BaseRequest<PostRequest>(url, Method.POST),
 
     override fun <T> asFutureTask(clazz: Class<T>): IFutureTask<T> {
         return request.asFutureTask(this, transferStation, url, clazz)
+    }
+
+    override fun <T> asFullFutureTask(clazz: Class<T>): IFullFutureTask<T> {
+        return request.asFullFutureTask(this, transferStation, url, clazz)
     }
 
 

@@ -5,6 +5,7 @@ import com.caldremch.http.core.framework.base.IFutureTask
 import com.caldremch.http.core.framework.base.IPostExecute
 import com.caldremch.http.core.framework.PostRequest
 import com.caldremch.http.core.framework.TransferStation
+import com.caldremch.http.core.framework.base.IFullFutureTask
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestHandle
 import com.caldremch.http.core.params.HttpParams
@@ -137,6 +138,30 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
         return if (!httpParams.isEmpty) {
             gson.toJson(httpParams.getUrlParamsMap())
         } else "{}"
+    }
+
+
+    override fun <T> asFullFutureTask(
+        request: PostRequest,
+        transferStation: TransferStation,
+        url: String,
+        clazz: Class<T>
+    ): IFullFutureTask<T> {
+        return object : IFullFutureTask<T>() {
+            override fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T> {
+                transferStation.dialogHandle = dialogEventHandle
+                return this
+            }
+
+            override fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T> {
+                transferStation.requestHandle = requestHandleEvent
+                return this
+            }
+
+            override fun execute(futureCallback: AbsCallback<T>) {
+                execute(request, transferStation, url, futureCallback, clazz)
+            }
+        }
     }
 
     override fun <T> asFutureTask(

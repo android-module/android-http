@@ -1,6 +1,7 @@
 package com.caldremch.http.core.framework
 
 import com.caldremch.http.core.abs.AbsCallback
+import com.caldremch.http.core.framework.base.IFullFutureTask
 import com.caldremch.http.core.framework.base.IFutureTask
 import com.caldremch.http.core.framework.base.IGetExecute
 import com.caldremch.http.core.params.Method
@@ -28,6 +29,28 @@ open class GetRequest(url: String) : BaseRequest<GetRequest>(url, Method.GET) {
 
     override fun <T> asFutureTask(clazz: Class<T>): IFutureTask<T> {
         return request.asFutureTask(this, transferStation, url, clazz)
+    }
+
+    override fun <T> asFullFutureTask(clazz: Class<T>): IFullFutureTask<T> {
+
+//        val obj = object : IFullFutureTask<T>{
+//            override fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T> {
+//                transferStation.dialogHandle = dialogEventHandle
+//                return this
+//            }
+//
+//            override fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T> {
+//                transferStation.requestHandle = requestHandleEvent
+//                return this
+//            }
+//
+//            override fun execute(futureCallback: AbsCallback<T>) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        }
+
+        return request.asFullFutureTask(this, transferStation, url, clazz)
     }
 
 }

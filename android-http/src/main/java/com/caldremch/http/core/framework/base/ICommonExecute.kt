@@ -7,4 +7,5 @@ import com.caldremch.http.core.framework.TransferStation
  */
 interface ICommonExecute<R>{
     fun <T> asFutureTask(request: R, transferStation: TransferStation, url:String, clazz: Class<T>): IFutureTask<T>
+    fun <T> asFullFutureTask(request: R, transferStation: TransferStation,  url:String, clazz: Class<T>): IFullFutureTask<T>
 }
