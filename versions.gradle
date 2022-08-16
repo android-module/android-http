@@ -13,8 +13,8 @@ ext{
 
 project.ext{
     remoteDep=false
-    android_http_version="1.0.1-rc2"
-    android_http_impl_version="1.0.0-rc2"
-    android_http_viewmodel_version="1.0.0-rc2"
+    android_http_version="1.0.1-rc3"
+    android_http_impl_version="1.0.0-rc3"
+    android_http_viewmodel_version="1.0.0-rc3"
 }
 

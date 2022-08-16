@@ -20,8 +20,11 @@ interface IFutureTask<T>{
     fun execute(futureCallback: AbsCallback<T>)
 }
 
-abstract class IFullFutureTask<T>{
-    abstract fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T>
-    abstract fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T>
+interface  IFullFutureTask<T>{
+     fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T>
+     fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T>
+    fun disableToast(): IFullFutureTask<T>
+    fun showDialog(): IFullFutureTask<T>
+    fun showDialog(message:String): IFullFutureTask<T>
     abstract fun execute(futureCallback: AbsCallback<T>)
 }

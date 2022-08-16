@@ -147,7 +147,7 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
         url: String,
         clazz: Class<T>
     ): IFullFutureTask<T> {
-        return object : IFullFutureTask<T>() {
+        return object : IFullFutureTask<T> {
             override fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T> {
                 transferStation.dialogHandle = dialogEventHandle
                 return this
@@ -155,6 +155,22 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
 
             override fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T> {
                 transferStation.requestHandle = requestHandleEvent
+                return this
+            }
+
+            override fun disableToast(): IFullFutureTask<T> {
+                transferStation.isShowToast = false
+                return this
+            }
+
+            override fun showDialog(): IFullFutureTask<T> {
+                transferStation.showDialog = true
+                return this
+            }
+
+            override fun showDialog(message: String): IFullFutureTask<T> {
+                transferStation.showDialog = true
+                transferStation.dialogTips = message
                 return this
             }
 

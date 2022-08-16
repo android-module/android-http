@@ -26,6 +26,8 @@ class MainViewModel : HttpViewModel() {
             .getData()
             .bindDialogHandle(this)
             .bindRequestHandle(this)
+            .showDialog()
+            .disableToast()
             .fullFutureTaskExec {
             }
     }

@@ -50,6 +50,12 @@ abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal va
         return this as R
     }
 
+    override fun showDialog(): R {
+        transferStation.showDialog = true
+        transferStation.dialogTips = ""
+        return this as R
+    }
+
     override fun showDialog(message: String): R {
         transferStation.showDialog = true
         transferStation.dialogTips = message

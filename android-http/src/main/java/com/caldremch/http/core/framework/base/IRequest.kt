@@ -13,6 +13,7 @@ interface IRequest<out R : IRequest<R>> {
     fun bindDialogHandle(dialogEventHandle: IDialogHandle): R
     fun bindRequestHandle(requestHandleEvent: IRequestHandle): R
     fun disableToast(): R
+    fun showDialog(): R
     fun showDialog(message:String): R
     fun noCustomerHeader(): R
     fun <T> execute( clazz: Class<T>,callback: AbsCallback<T>)
