@@ -17,6 +17,7 @@ class PostRequest(url: String) : BaseRequest<PostRequest>(url, Method.POST),
 
     private val request: IPostExecute by KoinJavaComponent.inject(IPostExecute::class.java)
 
+    @Suppress("UNCHECKED_CAST")
     override fun put(body: Any): PostRequest {
         if (type == Method.GET && body is Map<*, *>) {
             transferStation.httpParams.setUrlParamsMap(body as MutableMap<String, Any>)

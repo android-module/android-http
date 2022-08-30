@@ -5,9 +5,6 @@ import com.caldremch.android.http.viewmodel.ext.BaseHttpViewModelActivity
 import kotlin.reflect.KClass
 
 class HttpActivity : BaseHttpViewModelActivity<MainViewModel>() {
-    override fun getVMClass(): KClass<MainViewModel> {
-        return MainViewModel::class
-    }
 
     override val layoutId: Int
         get() = R.layout.activity_http

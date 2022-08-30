@@ -17,7 +17,8 @@ import com.caldremch.http.core.params.Method
  * @describe
  *
  **/
-abstract class BaseRequest<R : IRequest<R>>(val url: String, @Method internal var type: Int) :
+@Suppress("UNCHECKED_CAST")
+abstract class BaseRequest<R : IRequest<R>>(val url: String, var type: Method) :
     IRequest<R> {
 
     protected val transferStation by lazy { TransferStation() }

@@ -9,7 +9,7 @@ import com.caldremch.android.http.demo.HttpObsHandlerImpl
 import com.caldremch.android.http.demo.HttpUrlConfigImpl
 import com.caldremch.android.http.viewmodel.ext.IHttpDialogEvent
 import com.caldremch.android.log.DebugLogInitializer
-import com.caldremch.common.utils.startActivity
+import com.caldremch.common.utils.launch
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.abs.IHeader
 import com.caldremch.http.core.abs.IServerUrlConfig
@@ -44,6 +44,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun Go(view: View) {
-        startActivity<HttpActivity>()
+        launch<HttpActivity>()
     }
 }

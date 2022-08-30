@@ -48,15 +48,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation('io.insert-koin:koin-core:3.2.0')
     implementation("com.google.code.gson:gson:2.8.5")
-    implementation 'io.github.caldremch:android-common:1.0.0'
+    implementation 'io.github.caldremch:android-common:1.0.1-rc1'
+    implementation 'io.github.caldremch:android-viewmodel:1.0.1-rc3'
+//    implementation project(":android-common")
+//    implementation project(":android-viewmodel")
 
     if(isRemote()){
         implementation "io.github.caldremch:android-http:$android_http_version"
         implementation "io.github.caldremch:android-http-retrofit-rxjava3:$android_http_impl_version"
-        implementation "io.github.caldremch:android-http-viewmodel:$android_http_viewmodel_version"
+//        implementation "io.github.caldremch:android-http-viewmodel:$android_http_viewmodel_version"
     }else{
         implementation project(":android-http")
-        implementation project(":android-http-viewmodel")
+//        implementation project(":android-http-viewmodel")
         implementation project(":android-http-retrofit-rxjava3-impl")
     }
 

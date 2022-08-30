@@ -1,5 +1,6 @@
 package com.caldremch.android.http
 
+import com.caldremch.android.http.ext.composeBind
 import com.caldremch.android.http.viewmodel.HttpViewModel
 import com.caldremch.http.core.HttpManager
 import com.caldremch.http.core.ext.fullFutureTaskExec
@@ -18,15 +19,10 @@ class MainRepository {
 }
 
 class MainViewModel : HttpViewModel() {
-
     private val repository by lazy { MainRepository() }
-
     fun getData() {
-        repository
-            .getData()
-            .bindDialogHandle(this)
-            .bindRequestHandle(this)
-            .showDialog()
+        composeBind(repository
+            .getData())
             .disableToast()
             .fullFutureTaskExec {
             }

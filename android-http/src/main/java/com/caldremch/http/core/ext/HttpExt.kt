@@ -1,14 +1,12 @@
 package com.caldremch.http.core.ext
 
-import com.caldremch.http.core.*
+import com.caldremch.http.core.HttpManager
 import com.caldremch.http.core.abs.AbsCallback
-import com.caldremch.http.core.deprecated.observer.DialogCallback
 import com.caldremch.http.core.framework.GetRequest
-import com.caldremch.http.core.framework.base.HttpCallback
-import com.caldremch.http.core.deprecated.observer.HttpObservable
-import com.caldremch.http.core.framework.base.IFutureTask
 import com.caldremch.http.core.framework.PostRequest
+import com.caldremch.http.core.framework.base.HttpCallback
 import com.caldremch.http.core.framework.base.IFullFutureTask
+import com.caldremch.http.core.framework.base.IFutureTask
 
 /**
  * Created by Leon on 2022/7/26.
