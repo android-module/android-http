@@ -37,7 +37,7 @@ dependencies {
     if(isRemote()){
         implementation "io.github.caldremch:android-http:$android_http_version"
     }else{
-        implementation project(":android-http")
+        implementation project(":http-core")
     }
 
     implementation('io.insert-koin:koin-core:3.2.0')

@@ -7,9 +7,13 @@ plugins {
 
 apply from: "../versions.gradle"
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
 
 dependencies {
-    implementation 'io.github.caldremch:android-logger:1.0.1-rc2'
+    implementation 'io.github.caldremch:android-logger:1.0.2'
     implementation('io.insert-koin:koin-core:3.2.0')
     testImplementation 'junit:junit:4.13.2'
 }
@@ -27,9 +31,9 @@ java {
 
 ext {
     myLibraryVersion=android_http_version
-    myLibraryName="android-http"
-    myArtifactId="android-http"
-    myLibraryDescription="http request framework"
+    myLibraryName="http-core"
+    myArtifactId="http-core"
+    myLibraryDescription="http-core request framework"
 }
 
-apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
+//apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"

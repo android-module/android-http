@@ -58,7 +58,7 @@ dependencies {
         implementation "io.github.caldremch:android-http-retrofit-rxjava3:$android_http_impl_version"
 //        implementation "io.github.caldremch:android-http-viewmodel:$android_http_viewmodel_version"
     }else{
-        implementation project(":android-http")
+        implementation project(":http-core")
 //        implementation project(":android-http-viewmodel")
         implementation project(":android-http-retrofit-rxjava3-impl")
     }

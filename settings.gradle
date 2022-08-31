@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Http"
 include ':app'
-include ':android-http'
+include ':http-core'
 include ':android-http-retrofit-rxjava3-impl'
 //include ':android-viewmodel'
 //include ':android-common'
