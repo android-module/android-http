@@ -33,23 +33,6 @@ open class GetRequest(url: String) : BaseRequest<GetRequest>(url, Method.GET) {
 
     override fun <T> asFullFutureTask(clazz: Class<T>): IFullFutureTask<T> {
 
-//        val obj = object : IFullFutureTask<T>{
-//            override fun bindDialogHandle(dialogEventHandle: IDialogHandle): IFullFutureTask<T> {
-//                transferStation.dialogHandle = dialogEventHandle
-//                return this
-//            }
-//
-//            override fun bindRequestHandle(requestHandleEvent: IRequestHandle): IFullFutureTask<T> {
-//                transferStation.requestHandle = requestHandleEvent
-//                return this
-//            }
-//
-//            override fun execute(futureCallback: AbsCallback<T>) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        }
-
         return request.asFullFutureTask(this, transferStation, url, clazz)
     }
 

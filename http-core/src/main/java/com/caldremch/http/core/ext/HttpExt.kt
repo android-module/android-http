@@ -13,6 +13,7 @@ import com.caldremch.http.core.framework.base.IFutureTask
  */
 
 fun post(api: String) = HttpManager.post(api)
+
 fun get(api: String) = HttpManager.get(api)
 
 inline fun <reified RespType> GetRequest.getExec(

@@ -14,19 +14,8 @@ package com.caldremch.http.core.abs
 interface IServerUrlConfig {
 
     /**
-     * 是否可以配置服务器url,
-     * 打开配置后, currentUrl 实时生效, 否则不生效. 默认取defaultUrl
+     * 这是一个应用主体, 有多个host
      */
-    fun enableConfig(): Boolean
-
-    /**
-     * 设置当前的服务器请求 url
-     */
-    fun currentUrl(): String
-
-    /**
-     * 设置默认的 url
-     */
-    fun defaultUrl(): String
+    fun channels():MutableMap<Any?, IHostConfig>
 
 }

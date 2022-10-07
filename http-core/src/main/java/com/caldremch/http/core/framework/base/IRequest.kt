@@ -8,6 +8,7 @@ import com.caldremch.http.core.framework.handle.IRequestHandle
  * Created by Leon on 2022/7/8
  */
 interface IRequest<out R : IRequest<R>> {
+    fun channel(channel:Any?): R
     fun put(key: String, value: Any?): R
     fun path(pathName: String, value: String): R
     fun bindDialogHandle(dialogEventHandle: IDialogHandle): R

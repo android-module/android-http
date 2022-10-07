@@ -1,5 +1,6 @@
 package com.caldremch.http.core.framework
 
+import com.caldremch.http.core.abs.IServerUrlConfig
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestHandle
 import com.caldremch.http.core.params.HttpParams
@@ -26,4 +27,9 @@ class TransferStation {
     var requestHandle: IRequestHandle? = null
     var showDialog: Boolean = false
     var dialogTips:String = "loading..."
+
+    /**
+     * 渠道, null时默认为[IServerUrlConfig]的配置
+     */
+    var channel:Any? = null
 }

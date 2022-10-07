@@ -21,7 +21,13 @@ import com.caldremch.http.core.params.Method
 abstract class BaseRequest<R : IRequest<R>>(val url: String, var type: Method) :
     IRequest<R> {
 
+
     protected val transferStation by lazy { TransferStation() }
+
+    override fun channel(channel: Any?): R {
+        transferStation.channel = channel
+        return this as R
+    }
 
     override fun put(key: String, value: Any?): R {
         value?.let {
@@ -35,7 +41,7 @@ abstract class BaseRequest<R : IRequest<R>>(val url: String, var type: Method) :
         return this as R
     }
 
-    override fun bindRequestHandle(requestHandleEvent: IRequestHandle):  R {
+    override fun bindRequestHandle(requestHandleEvent: IRequestHandle): R {
         transferStation.requestHandle = requestHandleEvent
         return this as R
     }
