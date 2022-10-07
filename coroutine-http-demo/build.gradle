@@ -4,13 +4,16 @@ plugins {
 }
 
 
-
 apply from: "../versions.gradle"
 
 dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
     implementation 'io.github.caldremch:android-logger:1.0.2'
-    implementation('io.insert-koin:koin-core:3.2.0')
-    testImplementation 'junit:junit:4.13.2'
+    implementation project(":http-core")
+    implementation(project(":coroutine-http"))
+    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
 }
 
 compileKotlin{
@@ -24,11 +27,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-ext {
-    myLibraryVersion=android_http_version
-    myLibraryName="http-core"
-    myArtifactId="http-core"
-    myLibraryDescription="http-core request framework"
-}
+
 
 //apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"

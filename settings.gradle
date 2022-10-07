@@ -24,8 +24,6 @@ dependencyResolutionManagement {
 rootProject.name = "Http"
 include ':app'
 include ':http-core'
+include ':coroutine-http'
 include ':android-http-retrofit-rxjava3-impl'
-//include ':android-viewmodel'
-//include ':android-common'
-//project(':android-viewmodel').dir = file("/Users/caldremch/work/code/android/android-module/Common/android-viewmodel")
-//project(':android-common').dir = file("/Users/caldremch/work/code/android/android-module/Common/android-common")
+include ':coroutine-http-demo'
