@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import com.caldremch.android.http.demo.HttpCommonHeaderImpl
 import com.caldremch.android.http.demo.HttpObsHandlerImpl
-import com.caldremch.android.http.demo.HttpUrlConfigImpl
 import com.caldremch.android.http.viewmodel.ext.IHttpDialogEvent
 import com.caldremch.android.log.DebugLogInitializer
 import com.caldremch.common.utils.launch
@@ -15,6 +14,7 @@ import com.caldremch.http.core.abs.IHeader
 import com.caldremch.http.core.abs.IServerUrlConfig
 import com.caldremch.http.impl.IConvertStrategy
 import com.caldremch.http.koinHttpModules
+import com.caldremch.android.http.demo.HttpUrlConfigImpl
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf

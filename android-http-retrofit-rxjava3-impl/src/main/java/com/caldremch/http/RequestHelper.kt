@@ -3,7 +3,9 @@ package com.caldremch.http
 import com.caldremch.android.http.Api
 import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.abs.IHeader
+import com.caldremch.http.core.abs.IHostConfig
 import com.caldremch.http.core.abs.IServerUrlConfig
+import com.caldremch.http.exception.HostConfigErrorException
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -24,9 +26,12 @@ import java.util.concurrent.TimeUnit
  *
  * @describe
  *
+ *
+ * [setCustomHeader] false, 不设置任何头部参数,因为有些服务器接口传递参数会有问题, 当然, 这是服务器的问题, 但是也做了兼容了
+ *
  **/
 
-internal class RequestHelper(private val setCustomHeader:Boolean = true) {
+internal class RequestHelper(private val setCustomHeader:Boolean = true,  baseUrl:String? = null) {
 
     private val defualt_timeout = 20L
 
@@ -65,8 +70,14 @@ internal class RequestHelper(private val setCustomHeader:Boolean = true) {
         loggingInterceptor.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY)
         clientBuilder.addInterceptor(loggingInterceptor)
 
-        val baseUrl = if (config.enableConfig()) config.currentUrl() else config.defaultUrl()
-        retrofit = Retrofit.Builder().baseUrl(baseUrl)
+        var finalUrl = baseUrl
+        if(baseUrl.isNullOrEmpty()){
+            val channels  =  config.channels()
+            if(channels.isEmpty()) throw HostConfigErrorException()
+            val hostConfig: IHostConfig = channels[null] ?:(channels.iterator().next() as IHostConfig)
+            finalUrl= if (hostConfig.enableConfig()) hostConfig.currentUrl() else hostConfig.defaultUrl()
+        }
+        retrofit = Retrofit.Builder().baseUrl(finalUrl!!)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson)).client(clientBuilder.build())
             .build()

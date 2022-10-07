@@ -31,18 +31,14 @@ internal class GetExecuteImpl : BaseExecute(), IGetExecute {
         val pathUrl = if (httpPath.isEmpty) url else httpPath.getPathUrl(url)
         if (transferStation.httpParams.isEmpty) {
             go(
-                if (noCustomerHeader) noCustomerHeaderApi.get(pathUrl) else api.get(pathUrl),
+                getApi(noCustomerHeader, transferStation.channel).get(pathUrl),
                 callback,
                 clazz,
                 dialogHandle, showDialog, dialogTips, requestHandle,
                 isShowToast
             )
         } else {
-            go(
-                if (noCustomerHeader) noCustomerHeaderApi.get(
-                    pathUrl,
-                    transferStation.httpParams.urlParams
-                ) else api.get(pathUrl, transferStation.httpParams.urlParams),
+            go(getApi(noCustomerHeader, transferStation.channel).get(pathUrl, transferStation.httpParams.urlParams),
                 callback,
                 clazz,
                 dialogHandle, showDialog, dialogTips, requestHandle,

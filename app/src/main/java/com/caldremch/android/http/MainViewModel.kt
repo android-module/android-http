@@ -16,6 +16,12 @@ class MainRepository {
         return HttpManager.post("url")
             .postFullFutureTask()
     }
+
+    fun getDataWithChannel(): IFullFutureTask<Any> {
+        return HttpManager.post("url")
+            .channel(1)
+            .postFullFutureTask()
+    }
 }
 
 class MainViewModel : HttpViewModel() {
@@ -23,6 +29,12 @@ class MainViewModel : HttpViewModel() {
     fun getData() {
         composeBind(repository
             .getData())
+            .disableToast()
+            .fullFutureTaskExec {
+            }
+
+        composeBind(repository
+            .getDataWithChannel())
             .disableToast()
             .fullFutureTaskExec {
             }

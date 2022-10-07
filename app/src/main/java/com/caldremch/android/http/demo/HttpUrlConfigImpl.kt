@@ -1,5 +1,6 @@
 package com.caldremch.android.http.demo
 
+import com.caldremch.http.core.abs.IHostConfig
 import com.caldremch.http.core.abs.IServerUrlConfig
 
 
@@ -8,17 +9,46 @@ import com.caldremch.http.core.abs.IServerUrlConfig
  */
 class HttpUrlConfigImpl : IServerUrlConfig {
 
-    override fun enableConfig(): Boolean {
-        return true
+    class DefaultHost : IHostConfig {
+        override fun enableConfig(): Boolean {
+            return true
+        }
+
+        override fun currentUrl(): String {
+            return "http://baidu.com/"
+        }
+
+        override fun defaultUrl(): String {
+            return "http://baidu.com/"
+        }
+
     }
 
-    override fun currentUrl(): String {
-//        return "https://baidu.com/"
-        return "https://google.com/"  //timeout
+    class SecondaryHost : IHostConfig {
+        override fun enableConfig(): Boolean {
+            return true
+        }
+
+        override fun currentUrl(): String {
+            return "http://google.com/"
+        }
+
+        override fun defaultUrl(): String {
+            return "http://google.com/"
+        }
+
     }
 
-    override fun defaultUrl(): String {
-//        return "https:///baidu.com/"
-                return "https://google.com/"  //timeout
+
+    private val channels by lazy {
+        hashMapOf<Any?, IHostConfig>(
+            null to DefaultHost(),
+            1 to SecondaryHost()
+        )
+    }
+
+
+    override fun channels(): MutableMap<Any?, IHostConfig> {
+        return channels
     }
 }

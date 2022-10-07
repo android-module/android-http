@@ -39,7 +39,7 @@ internal class PostExecuteImpl: BaseExecute(), IPostExecute {
         val isShowToast = transferStation.isShowToast
 
         val pathUrl =  if(httpPath.isEmpty) url else httpPath.getPathUrl(url)
-
+        val api = getApi(transferStation.noCustomerHeader, transferStation.channel)
 
         if (body != null) {
             val requestBody: RequestBody

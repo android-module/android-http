@@ -1,16 +1,16 @@
 plugins {
     id 'java-library'
-    id 'org.jetbrains.kotlin.jvm' version '1.7.0'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 
 
 apply from: "../versions.gradle"
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
+//repositories {
+//    mavenLocal()
+//    mavenCentral()
+//}
 
 dependencies {
     implementation 'io.github.caldremch:android-logger:1.0.2'
