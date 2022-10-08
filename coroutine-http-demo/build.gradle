@@ -8,7 +8,7 @@ apply from: "../versions.gradle"
 
 dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
-    implementation 'io.github.caldremch:android-logger:1.0.2'
+    implementation "io.github.caldremch:android-logger:$android_log_version"
     implementation project(":http-core")
     implementation(project(":coroutine-http"))
     implementation("com.google.code.gson:gson:2.8.5")

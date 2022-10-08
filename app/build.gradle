@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation 'io.github.caldremch:android-logger:1.0.0'
+    implementation "io.github.caldremch:android-logger:$android_log_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     implementation 'com.github.li-xiaojun:XPopup:2.8.11'

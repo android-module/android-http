@@ -15,7 +15,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:$versions_retrofit")
     api ('io.insert-koin:koin-core:3.2.0')
-    implementation 'io.github.caldremch:android-logger:1.0.2'
+    implementation "io.github.caldremch:android-logger:$android_log_version"
     implementation("com.squareup.okhttp3:logging-interceptor:$versions_okhttp3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 }
