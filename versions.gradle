@@ -16,6 +16,5 @@ project.ext{
     android_log_version="1.0.4-rc2"
     android_http_version="1.2.0"
     android_http_impl_version="1.0.0-rc4"
-    android_http_viewmodel_version="1.0.0-rc3"
 }
 

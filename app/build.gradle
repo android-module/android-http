@@ -50,16 +50,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.5")
     implementation "io.github.caldremch:android-common:1.0.1-rc8"
     implementation 'io.github.caldremch:android-viewmodel:1.0.1-rc8'
-//    implementation project(":android-common")
-//    implementation project(":android-viewmodel")
-
     if(isRemote()){
         implementation "io.github.caldremch:android-http:$android_http_version"
         implementation "io.github.caldremch:android-http-retrofit-rxjava3:$android_http_impl_version"
-//        implementation "io.github.caldremch:android-http-viewmodel:$android_http_viewmodel_version"
     }else{
         implementation project(":http-core")
-//        implementation project(":android-http-viewmodel")
         implementation project(":android-http-retrofit-rxjava3-impl")
     }
 
