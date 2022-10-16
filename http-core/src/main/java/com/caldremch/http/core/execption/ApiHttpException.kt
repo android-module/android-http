@@ -1,4 +1,4 @@
-package com.caldremch.http.exception
+package com.caldremch.http.core.execption
 
 /**
  *

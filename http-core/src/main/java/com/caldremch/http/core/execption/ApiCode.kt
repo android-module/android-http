@@ -1,11 +1,11 @@
-package com.caldremch.http.exception
+package com.caldremch.http.core.execption
 
 /**
  * @author Caldremch
  * @date 2019-02-26 11:22
  * @describe
  */
-internal object ApiCode {
+object ApiCode {
     const val ERROR = 0x10002
     const val JSON_ERROR = 0x10003
     const val SUCC_AND_DATA_NULL = 0x10004

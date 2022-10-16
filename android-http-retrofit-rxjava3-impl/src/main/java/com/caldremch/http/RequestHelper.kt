@@ -5,7 +5,7 @@ import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.abs.IHeader
 import com.caldremch.http.core.abs.IHostConfig
 import com.caldremch.http.core.abs.IServerUrlConfig
-import com.caldremch.http.exception.HostConfigErrorException
+import com.caldremch.http.core.execption.HostConfigErrorException
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

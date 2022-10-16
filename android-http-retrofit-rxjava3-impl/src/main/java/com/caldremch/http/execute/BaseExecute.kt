@@ -11,7 +11,7 @@ import com.caldremch.http.core.abs.IConvert
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.abs.IHostConfig
 import com.caldremch.http.core.abs.IServerUrlConfig
-import com.caldremch.http.exception.HostConfigErrorException
+import com.caldremch.http.core.execption.HostConfigErrorException
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import org.koin.java.KoinJavaComponent

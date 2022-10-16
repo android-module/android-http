@@ -52,10 +52,11 @@ dependencies {
     implementation 'io.github.caldremch:android-viewmodel:1.0.1-rc8'
     if(isRemote()){
         implementation "io.github.caldremch:android-http:$android_http_version"
-        implementation "io.github.caldremch:android-http-retrofit-rxjava3:$android_http_impl_version"
+        runtimeOnly "io.github.caldremch:android-http-retrofit-rxjava3:$android_http_impl_version"
     }else{
         implementation project(":http-core")
-        implementation project(":android-http-retrofit-rxjava3-impl")
+        runtimeOnly project(":android-http-retrofit-rxjava3-impl")
+//        runtimeOnly project(":coroutine-http-android")
     }
 
 }

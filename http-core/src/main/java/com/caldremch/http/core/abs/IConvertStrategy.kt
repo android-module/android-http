@@ -1,4 +1,4 @@
-package com.caldremch.http.impl
+package com.caldremch.http.core.abs
 
 import java.io.InputStream
 

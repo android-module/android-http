@@ -6,7 +6,7 @@ import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestContext
 import com.caldremch.http.core.framework.handle.IRequestHandle
-import com.caldremch.http.exception.NullDataSuccessException
+import com.caldremch.http.core.execption.NullDataSuccessException
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 

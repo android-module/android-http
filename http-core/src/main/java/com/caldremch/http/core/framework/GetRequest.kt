@@ -4,6 +4,8 @@ import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.framework.base.IFullFutureTask
 import com.caldremch.http.core.framework.base.IFutureTask
 import com.caldremch.http.core.framework.base.IGetExecute
+import com.caldremch.http.core.framework.base.IGetRequest
+import com.caldremch.http.core.framework.base.IPostRequest
 import com.caldremch.http.core.params.Method
 import org.koin.java.KoinJavaComponent.inject
 
@@ -19,7 +21,8 @@ import org.koin.java.KoinJavaComponent.inject
  * @describe
  *
  **/
-open class GetRequest(url: String) : BaseRequest<GetRequest>(url, Method.GET) {
+open class GetRequest(url: String) : BaseRequest<GetRequest>(url, Method.GET),
+    IGetRequest<GetRequest> {
 
     private val request: IGetExecute by inject(IGetExecute::class.java)
 

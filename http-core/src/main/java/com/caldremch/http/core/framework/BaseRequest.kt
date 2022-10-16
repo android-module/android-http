@@ -18,7 +18,7 @@ import com.caldremch.http.core.params.Method
  *
  **/
 @Suppress("UNCHECKED_CAST")
-abstract class BaseRequest<R : IRequest<R>>(val url: String, var type: Method) :
+abstract class BaseRequest<R : IRequest<R>>(protected val url: String,protected var type: Method) :
     IRequest<R> {
 
 

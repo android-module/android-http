@@ -2,6 +2,7 @@ package com.caldremch.http.impl
 
 
 import com.caldremch.http.core.abs.IConvert
+import com.caldremch.http.core.abs.IConvertStrategy
 import com.caldremch.http.core.model.ResponseBodyWrapper
 import okhttp3.ResponseBody
 import org.koin.java.KoinJavaComponent.inject
@@ -12,7 +13,7 @@ import org.koin.java.KoinJavaComponent.inject
  */
 internal class HttpConvertImpl : IConvert<ResponseBody> {
 
-    private val convertStrategy:IConvertStrategy by inject(IConvertStrategy::class.java)
+    private val convertStrategy: IConvertStrategy by inject(IConvertStrategy::class.java)
 
     override fun <T> convert(
         responseBodyWrapper: ResponseBodyWrapper<ResponseBody>, clz: Class<T>

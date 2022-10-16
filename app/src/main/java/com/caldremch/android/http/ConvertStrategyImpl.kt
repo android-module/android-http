@@ -1,8 +1,8 @@
 package com.caldremch.android.http
 
 import com.caldremch.android.log.errorLog
-import com.caldremch.http.exception.NullDataSuccessException
-import com.caldremch.http.impl.IConvertStrategy
+import com.caldremch.http.core.abs.IConvertStrategy
+import com.caldremch.http.core.execption.NullDataSuccessException
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonNull
 import com.google.gson.JsonParseException

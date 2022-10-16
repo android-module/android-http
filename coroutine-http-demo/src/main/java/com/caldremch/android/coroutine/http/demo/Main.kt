@@ -1,7 +1,6 @@
 package com.caldremch.android.coroutine.http.demo
 
 import com.caldremch.android.coroutine.http.demo.biz.LoginApi
-import com.caldremch.android.coroutine.http.demo.biz.RSAUtils
 import com.caldremch.android.coroutine.http.demo.biz.UserInfoResp
 import com.caldremch.android.coroutine.http.demo.biz.UserManager
 import com.caldremch.android.coroutine.http.demo.impl.ConvertStrategyImpl
@@ -12,12 +11,11 @@ import com.caldremch.android.log.DebugLogInitializer
 import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.HttpManager
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
+import com.caldremch.http.core.abs.IConvertStrategy
 import com.caldremch.http.core.abs.IHeader
 import com.caldremch.http.core.abs.IServerUrlConfig
 import com.caldremch.http.core.ext.posExec
 import com.caldremch.http.core.ext.post
-import com.caldremch.http.impl.IConvertStrategy
-import com.caldremch.http.koinHttpModules
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -29,7 +27,7 @@ fun initLog() {
 
 fun initHttp() {
     startKoin {
-        modules(koinHttpModules)
+//        modules(koinHttpModules)
         modules(module {
             singleOf<IHeader> { HttpCommonHeaderImpl() }
             factoryOf<ICommonRequestEventCallback> {
