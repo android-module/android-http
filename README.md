@@ -1,3 +1,10 @@
+![main](https://github.com/android-module/android-http/actions/workflows/android.yml/badge.svg?branch=main)
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
+![maven](https://img.shields.io/maven-central/v/io.github.caldremch/android-http?style=flat-square)
+![core](https://img.shields.io/maven-central/v/io.github.caldremch/android-http-retrofit-rxjava3?style=flat-square)
+![core](https://img.shields.io/maven-central/v/io.github.caldremch/coroutine-http?style=flat-square)
+
+
 ## 轻量的 框架-实现 网络请求库, 支持常规的[链式调用]和[泛型]处理
 
 通过对网络请求底层框架的定义,简单的链式调用封装, 关于网络请求库的扩展实现都是基于koin去完成.
