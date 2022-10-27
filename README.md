@@ -2,9 +2,11 @@
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
 
 
-**http-core最新版本:**![maven](https://img.shields.io/maven-central/v/io.github.caldremch/http-core?style=flat-square)
-**android-http-retrofit-rxjava3最新版本:**![core](https://img.shields.io/maven-central/v/io.github.caldremch/android-http-retrofit-rxjava3?style=flat-square)
-**coroutine-http最新版本:**![core](https://img.shields.io/maven-central/v/io.github.caldremch/coroutine-http?style=flat-square)
+**[http-core最新版本]-->**![maven](https://img.shields.io/maven-central/v/io.github.caldremch/http-core?style=flat-square)
+
+**[android-http-retrofit-rxjava3最新版本]-->**![core](https://img.shields.io/maven-central/v/io.github.caldremch/android-http-retrofit-rxjava3?style=flat-square)
+
+**[coroutine-http最新版本]-->**![core](https://img.shields.io/maven-central/v/io.github.caldremch/coroutine-http?style=flat-square)
 
 
 ## 轻量的 框架-实现 网络请求库, 支持常规的[链式调用]和[泛型]处理
