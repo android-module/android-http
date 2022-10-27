@@ -1,10 +1,10 @@
 package com.caldremch.android.http
 
 import android.content.Context
+import com.caldremch.android.http.adapter.IHttpDialogEvent
 import com.caldremch.android.http.demo.HttpCommonHeaderImpl
 import com.caldremch.android.http.demo.HttpObsHandlerImpl
 import com.caldremch.android.http.demo.HttpUrlConfigImpl
-import com.caldremch.android.http.viewmodel.ext.IHttpDialogEvent
 import com.caldremch.http.core.IHttpInit
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.abs.IConvertStrategy

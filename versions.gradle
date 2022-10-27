@@ -13,9 +13,9 @@ ext{
 
 project.ext{
     remoteDep=false
-    android_log_version="1.0.4-rc2"
-    android_http_version="1.2.1-rc1"
-    android_http_impl_version="1.0.0-rc5"
+    android_log_version="1.0.7"
+    android_http_version="1.2.2"
+    android_http_impl_version="1.0.1"
     coroutine_http_impl_version="1.0.0-rc1"
 }
 

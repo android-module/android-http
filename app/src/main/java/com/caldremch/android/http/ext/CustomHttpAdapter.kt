@@ -1,7 +1,7 @@
 package com.caldremch.android.http.ext
 
-import com.caldremch.android.http.viewmodel.HttpViewModel
-import com.caldremch.android.http.viewmodel.adapter.IRequestContextAdapter
+import com.caldremch.android.http.adapter.HttpViewModel
+import com.caldremch.android.http.adapter.IRequestContextAdapter
 import com.caldremch.http.core.framework.base.IFullFutureTask
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestContext

@@ -6,12 +6,12 @@ plugins {
 apply from: "../versions.gradle"
 android {
     namespace 'com.caldremch.android.http'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.caldremch.android.http"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -34,10 +34,9 @@ android {
 }
 
 dependencies {
-    implementation "io.github.caldremch:android-logger:$android_log_version"
+    implementation "io.github.caldremch:core-logger:$android_log_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation 'com.github.li-xiaojun:XPopup:2.8.11'
     implementation "androidx.activity:activity-ktx:1.5.1"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -48,8 +47,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation('io.insert-koin:koin-core:3.2.0')
     implementation("com.google.code.gson:gson:2.8.5")
-    implementation "io.github.caldremch:android-common:1.0.1-rc8"
-    implementation 'io.github.caldremch:android-viewmodel:1.0.1-rc8'
+    implementation "io.github.caldremch:android-common:1.0.2"
+    implementation 'io.github.caldremch:android-viewmodel:1.0.2'
     if(isRemote()){
         implementation "io.github.caldremch:android-http:$android_http_version"
         runtimeOnly "io.github.caldremch:android-http-retrofit-rxjava3:$android_http_impl_version"
