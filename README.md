@@ -1,8 +1,10 @@
 ![main](https://github.com/android-module/android-http/actions/workflows/android.yml/badge.svg?branch=main)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
-![maven](https://img.shields.io/maven-central/v/io.github.caldremch/android-http?style=flat-square)
-![core](https://img.shields.io/maven-central/v/io.github.caldremch/android-http-retrofit-rxjava3?style=flat-square)
-![core](https://img.shields.io/maven-central/v/io.github.caldremch/coroutine-http?style=flat-square)
+
+
+**http-core最新版本:**![maven](https://img.shields.io/maven-central/v/io.github.caldremch/http-core?style=flat-square)
+**android-http-retrofit-rxjava3最新版本:**![core](https://img.shields.io/maven-central/v/io.github.caldremch/android-http-retrofit-rxjava3?style=flat-square)
+**coroutine-http最新版本:**![core](https://img.shields.io/maven-central/v/io.github.caldremch/coroutine-http?style=flat-square)
 
 
 ## 轻量的 框架-实现 网络请求库, 支持常规的[链式调用]和[泛型]处理
@@ -18,13 +20,13 @@
 ```gradle
 
 //基础库 必须
-implementation 'io.github.caldremch:android-http:1.0.1-rc3'
+implementation 'io.github.caldremch:http-core:1.2.2'
 
 //实现库 (retrofit2+rxjava3)
-runtimeOnly 'io.github.caldremch:android-http-retrofit-rxjava3:1.0.0-rc5'
+runtimeOnly 'io.github.caldremch:android-http-retrofit-rxjava3:1.0.1'
 
 //实现库 (kotlin协程实现)
-runtimeOnly 'io.github.caldremch:coroutine-http:1.0.0-rc1'
+runtimeOnly 'io.github.caldremch:coroutine-http:1.0.1'
 
 //自己的实现库
 runtimeOnly project(':my-http-impl')
