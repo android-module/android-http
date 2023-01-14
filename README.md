@@ -112,6 +112,11 @@ HttpManagerInitializer.init(MyHttpInit())
 其中包含的一些扩展方法, 更多的扩展方法可以查看 http-core里面的 HttpExt.kt文件
 
 
+# 注意
+
+需要添加gson和koin的依赖
+
+
 
 
 
