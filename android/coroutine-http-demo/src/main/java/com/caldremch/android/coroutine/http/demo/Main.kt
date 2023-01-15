@@ -7,16 +7,13 @@ import com.caldremch.android.coroutine.http.demo.impl.HttpCommonHeaderImpl
 import com.caldremch.android.coroutine.http.demo.impl.HttpObsHandlerImpl
 import com.caldremch.android.coroutine.http.demo.impl.HttpUrlConfigImpl
 import com.caldremch.android.log.DebugLogInitializer
-import com.caldremch.android.log.debugLog
 import com.caldremch.android.log.errorLog
 import com.caldremch.http.core.HttpInitializer
 import com.caldremch.http.core.HttpManager
 import com.caldremch.http.execute.GetExecuteImpl
 import com.caldremch.http.execute.PostExecuteImpl
 import com.caldremch.http.impl.HttpConvertImpl
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 fun initLog() {
     DebugLogInitializer.initLite(true)
@@ -39,11 +36,29 @@ fun initHttp() {
 }
 
 fun startRequest() {
-    runBlocking {
-        val resp = HttpManager.post(ApiConstant.news)
-            .channel(2)
+    val scope = CoroutineScope(SupervisorJob())
+    val job = scope.launch {
+        val resp = HttpManager.post(ApiConstant.goApi_getTest)
+            .channel(3)
+            .catchError {
+                errorLog { "my error callback: ${it?.message}  $it" }
+            }
             .execute(UserInfoResp::class.java)
         errorLog { "请求结果:$resp" }
+    }
+
+    scope.launch {
+        val resp = HttpManager.get(ApiConstant.goApi_getTest)
+            .channel(3)
+            .catchError {
+                errorLog { "my error callback2: ${it?.message}  $it" }
+            }
+            .execute(UserInfoResp::class.java)
+    }
+
+    GlobalScope.launch {
+        delay(3000)
+        job.cancelAndJoin()
     }
 }
 
@@ -51,7 +66,7 @@ fun main(args: Array<String>) {
     initLog()
     initHttp()
     startRequest()
-    Thread.sleep(5000)
+    Thread.sleep(115000)
 }
 
 

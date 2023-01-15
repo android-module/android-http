@@ -46,6 +46,7 @@ class GetExecuteImpl : BaseExecute(), IGetExecute {
                 handler.onSuccess(convertResult)
             }
         } catch (e: Exception) {
+            transferStation.errorCallback?.onError(e)
             handler.onError(e)
         }
         return convertResult

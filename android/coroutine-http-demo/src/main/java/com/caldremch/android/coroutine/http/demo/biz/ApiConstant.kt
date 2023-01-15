@@ -5,5 +5,6 @@ package com.caldremch.android.coroutine.http.demo.biz
  */
 object ApiConstant {
     const val login = "/login"
-    const val  news="/toutiao/index"
+    const val news = "/toutiao/index"
+    const val goApi_getTest = "/getTest"
 }

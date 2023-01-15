@@ -30,12 +30,28 @@ class HttpUrlConfigImpl : IServerUrlConfig {
         override fun enableConfig(): Boolean {
             return true
         }
+
         override fun currentUrl(): String {
             return "http://v.juhe.cn/"
         }
 
         override fun defaultUrl(): String {
             return "http://v.juhe.cn/"
+        }
+
+    }
+
+    class GoLocalApi : IHostConfig {
+        override fun enableConfig(): Boolean {
+            return true
+        }
+
+        override fun currentUrl(): String {
+            return "http://localhost:28092/"
+        }
+
+        override fun defaultUrl(): String {
+            return "http://localhost:28092/"
         }
 
     }
@@ -60,7 +76,8 @@ class HttpUrlConfigImpl : IServerUrlConfig {
         hashMapOf<Any?, IHostConfig>(
             null to DefaultHost(),
             1 to SecondaryHost(),
-            2 to JuHeApi()
+            2 to JuHeApi(),
+            3 to GoLocalApi()
         )
     }
 

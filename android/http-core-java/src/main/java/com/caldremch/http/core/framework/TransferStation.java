@@ -5,7 +5,6 @@ import com.caldremch.http.core.framework.handle.IDialogHandle;
 import com.caldremch.http.core.framework.handle.IRequestHandle;
 import com.caldremch.http.core.params.HttpParams;
 import com.caldremch.http.core.params.HttpPath;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class TransferStation {
 
-    public IErrorCallback errorCallback;
+    public @Nullable IErrorCallback errorCallback;
     private boolean formUrlEncoded;
     private boolean postQuery;
     @Nullable
