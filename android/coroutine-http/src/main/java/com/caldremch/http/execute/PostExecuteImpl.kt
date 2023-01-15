@@ -84,8 +84,7 @@ class PostExecuteImpl : BaseExecute(), IPostExecute {
             convertResult = convert.convert(ResponseBodyWrapper(resp), clazz)
             handler.onSuccess(convertResult)
         } catch (e: Exception) {
-            transferStation.errorCallback?.onError(e)
-            handler.onError(e)
+            handleException(e, transferStation, handler)
         }
         return convertResult
     }

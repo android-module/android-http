@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -33,3 +34,23 @@ dependencies {
     implementation(project(":http-core-java"))
     implementation(project(":coroutine-http"))
 }
+
+version = "2.0.0-alpha01"
+
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                url = uri("/Users/caldremch/work/code/android/android-module/Common/localRepo")
+            }
+        }
+        publications {
+            createJava(MavenPublication) {
+                groupId = myPublishedGroupId
+                artifactId = "http-coroutine-android"
+                from components.debug
+            }
+        }
+    }
+}
+

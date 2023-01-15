@@ -18,5 +18,6 @@ interface IRequest<R : IRequest<R>> {
     fun showDialog(str: String): R
     fun noCustomerHeader(): R
     fun catchError(errorBlock: IErrorCallback): R
+    fun passiveCancelCallbackHandle():R
     suspend fun <T> execute(cls: Class<T>): T?
 }

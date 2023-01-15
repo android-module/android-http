@@ -14,6 +14,10 @@ import org.jetbrains.annotations.Nullable;
 public class TransferStation {
 
     public @Nullable IErrorCallback errorCallback;
+    /**
+     * 子协程因为作用域结束,被取消的异常处理
+     */
+    public boolean passiveCancelCallbackHandle = false;
     private boolean formUrlEncoded;
     private boolean postQuery;
     @Nullable

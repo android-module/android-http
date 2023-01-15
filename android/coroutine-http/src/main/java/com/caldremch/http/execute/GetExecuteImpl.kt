@@ -1,10 +1,13 @@
 package com.caldremch.http.execute
 
+import com.caldremch.http.CoroutineHandler
 import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.framework.GetRequest
 import com.caldremch.http.core.framework.TransferStation
 import com.caldremch.http.core.framework.base.IGetExecute
 import com.caldremch.http.core.model.ResponseBodyWrapper
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.suspendCancellableCoroutine
 
 
 class GetExecuteImpl : BaseExecute(), IGetExecute {
@@ -46,11 +49,12 @@ class GetExecuteImpl : BaseExecute(), IGetExecute {
                 handler.onSuccess(convertResult)
             }
         } catch (e: Exception) {
-            transferStation.errorCallback?.onError(e)
-            handler.onError(e)
+            handleException(e, transferStation, handler)
         }
         return convertResult
     }
+
+
 
 
 }

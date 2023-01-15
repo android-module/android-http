@@ -66,6 +66,11 @@ abstract class BaseRequest<R : IRequest<R>>(/* JADX INFO: Access modifiers chang
         return this as R
     }
 
+    override fun passiveCancelCallbackHandle(): R {
+        transferStation.passiveCancelCallbackHandle = true
+        return this as R
+    }
+
     override fun catchError(errorBlock: IErrorCallback): R {
         //单次回调
         transferStation.errorCallback =  errorBlock

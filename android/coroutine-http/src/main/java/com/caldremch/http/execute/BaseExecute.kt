@@ -7,9 +7,11 @@ import com.caldremch.http.core.HttpInitializer
 import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.abs.IConvert
 import com.caldremch.http.core.abs.IHostConfig
+import com.caldremch.http.core.framework.TransferStation
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestHandle
 import com.caldremch.http.exception.HostConfigErrorException
+import kotlinx.coroutines.CancellableContinuation
 import okhttp3.ResponseBody
 
 /**
@@ -93,6 +95,22 @@ abstract class BaseExecute {
             showToast
         )
 
+    }
+
+    protected fun <T : Any?> handleException(
+        e: Exception,
+        transferStation: TransferStation,
+        handler: CoroutineHandler<T>
+    ) {
+        if (e is CancellableContinuation<*>) {
+            if (transferStation.passiveCancelCallbackHandle) {
+                transferStation.errorCallback?.onError(e)
+                handler.onError(e)
+            }
+        } else {
+            transferStation.errorCallback?.onError(e)
+            handler.onError(e)
+        }
     }
 
 }
