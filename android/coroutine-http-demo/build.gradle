@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+
+apply from: "../../versions.gradle"
+
+dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    implementation "io.github.caldremch:core-logger:$android_log_version"
+    implementation project(":http-core-java")
+    api (project(":coroutine-http"))
+    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+}
+
+compileKotlin{
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+
+
+//apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"

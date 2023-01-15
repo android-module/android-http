@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+apply from: "../../versions.gradle"
+
+
+def versions_retrofit = "2.9.0"
+def versions_okhttp3 = "4.8.1"
+dependencies {
+    if(isRemote()){
+        implementation "io.github.caldremch:android-http:$android_http_version"
+    }else{
+        implementation project(":http-core-java")
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:$versions_retrofit")
+    implementation "io.github.caldremch:core-logger:$android_log_version"
+    implementation("com.squareup.okhttp3:logging-interceptor:$versions_okhttp3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+}
+
+ext {
+    myLibraryVersion=coroutine_http_impl_version
+    myLibraryName="coroutine-http"
+    myArtifactId="coroutine-http"
+    myLibraryDescription="http request framework implementation"
+}
+
+apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,125 @@
+@startuml
+
+interface AbsCallback<T>{
+    fun onSuccess(data: T?)
+    fun onError(e: Throwable?) {}
+}
+
+
+interface ICommonRequestEventCallback {
+    fun onStart() {}
+    fun onSuccess(data: Any?) {}
+    //用户处理错误
+    fun onError(e: Throwable, showToast:Boolean){}
+    fun onEnd() {}
+}
+
+interface IConvert<R> {
+    fun <T> convert(responseBodyWrapper: ResponseBodyWrapper<R>, clz:Class<T>): T
+}
+
+
+interface IHeader {
+    fun getCommonHeader():Map<String, String>
+}
+
+interface IHostConfig {
+    fun enableConfig(): Boolean //是否可以配置服务器url,打开配置后, currentUrl 实时生效, 否则不生效. 默认取defaultUrl
+    fun currentUrl(): String //设置当前的服务器请求 url
+    fun defaultUrl(): String //设置默认的
+}
+
+interface IServerUrlConfig {
+    fun channels():MutableMap<Any?, IHostConfig> // 这是一个应用主体, 有多个host
+}
+
+note right of AbsCallback: 网络请求回调
+note right of ICommonRequestEventCallback: 网络请求声明周期回调
+note right of IConvert: 网络请求数据转换器
+note right of IHeader: 网络请求通用头部添加
+note right of IServerUrlConfig: 服务器连接配置器
+note right of IHostConfig: 服务器详情配置
+
+
+interface IRequest<out R : IRequest<R>> {
+    fun channel(channel:Any?): R
+    fun put(key: String, value: Any?): R
+    fun path(pathName: String, value: String): R
+    fun bindDialogHandle(dialogEventHandle: IDialogHandle): R
+    fun bindRequestHandle(requestHandleEvent: IRequestHandle): R
+    fun disableToast(): R
+    fun showDialog(): R
+    fun showDialog(message:String): R
+    fun noCustomerHeader(): R
+    fun <T> execute( clazz: Class<T>,callback: AbsCallback<T>)
+    fun <T> asFutureTask( clazz: Class<T>): IFutureTask<T>
+    fun <T> asFullFutureTask( clazz: Class<T>): IFullFutureTask<T>
+}
+
+note right of IRequest: 通用请求调用api
+
+
+interface IPostRequest<out R : IRequest<R>>{
+    fun put(body: Any): R
+    fun formUrlEncoded(): R
+    fun postQuery(): R
+}
+
+interface IGetRequest {}
+
+IPostRequest--|>IRequest:继承
+IGetRequest--|>IRequest:继承
+
+note top of IPostRequest: Post请求调用api
+note top of IGetRequest: Get请求调用api
+
+class BaseRequest
+class GetRequest
+class PostRequest
+
+class TransferStation
+
+note top of TransferStation: 请求参数的暂存区
+
+TransferStation<--BaseRequest:has
+
+note right of BaseRequest: 处理请求参数的组装
+
+BaseRequest<|--GetRequest:派生
+BaseRequest<|--PostRequest:派生
+
+
+
+interface IDialogHandle{
+    fun dialogShowTiming(dialogTips:String) {}
+    fun dialogDismissTiming(){}
+}
+
+interface IRequestContext{
+    fun cancel()
+}
+
+interface IRequestHandle {
+    fun onRequestHandle(ctx: IRequestContext)
+}
+
+interface IConvertStrategy{
+    fun <T> isStreamConvert(clz: Class<T>):Boolean
+    fun <T> convertStream(inputStream: InputStream?):T
+    fun <T> convertCommon(bodyString:String, clz: Class<T>):T
+}
+
+interface IConvert<R> {
+    fun <T> convert(responseBodyWrapper: ResponseBodyWrapper<R>, clz:Class<T>): T
+}
+
+note right of IDialogHandle: 弹窗管理
+note right of IRequestContext: 请求上下文(有取消请求的api)
+note right of IRequestHandle: 用于回调请求上下文给调用者
+note right of IConvert: 返回体转换器
+note right of IConvertStrategy: 返回体的转换策略
+
+IConvert<--IConvertStrategy:has
+
+
+@enduml
