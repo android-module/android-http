@@ -11,7 +11,7 @@ import com.caldremch.http.core.framework.TransferStation
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestHandle
 import com.caldremch.http.exception.HostConfigErrorException
-import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.CancellationException
 import okhttp3.ResponseBody
 
 /**
@@ -102,7 +102,7 @@ abstract class BaseExecute {
         transferStation: TransferStation,
         handler: CoroutineHandler<T>
     ) {
-        if (e is CancellableContinuation<*>) {
+        if (e is CancellationException) {
             if (transferStation.passiveCancelCallbackHandle) {
                 transferStation.errorCallback?.onError(e)
                 handler.onError(e)

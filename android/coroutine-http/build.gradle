@@ -33,7 +33,7 @@ ext {
 
 //apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
 
-if(false){
+if (isIdea) {
     test {
         useJUnitPlatform()
     }

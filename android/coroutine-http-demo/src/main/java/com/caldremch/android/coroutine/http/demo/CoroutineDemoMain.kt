@@ -37,19 +37,20 @@ fun initHttp() {
 
 fun startRequest() {
     val scope = CoroutineScope(SupervisorJob())
-    val job = scope.launch {
-        val resp = HttpManager.post(ApiConstant.goApi_getTest)
-            .channel(3)
-            .catchError {
-                errorLog { "my error callback: ${it?.message}  $it" }
-            }
-            .execute(UserInfoResp::class.java)
-        errorLog { "请求结果:$resp" }
-    }
+//    val job = scope.launch {
+//        val resp = HttpManager.post(ApiConstant.goApi_getTest)
+//            .channel(3)
+//            .catchError {
+//                errorLog { "my error callback: ${it?.message}  $it" }
+//            }
+//            .execute(UserInfoResp::class.java)
+//        errorLog { "请求结果:$resp" }
+//    }
 
-    scope.launch {
-        val resp = HttpManager.get(ApiConstant.goApi_getTest)
+    val loginJob = scope.launch {
+        val resp = HttpManager.get(ApiConstant.login)
             .channel(3)
+            .passiveCancelCallbackHandle()
             .catchError {
                 errorLog { "my error callback2: ${it?.message}  $it" }
             }
@@ -58,7 +59,8 @@ fun startRequest() {
 
     GlobalScope.launch {
         delay(3000)
-        job.cancelAndJoin()
+        loginJob.cancelAndJoin()
+//        job.cancelAndJoin()
     }
 }
 
