@@ -1,4 +1,4 @@
-package com.caldremch.android.coroutine.http.demo.impl
+package impl
 
 import com.caldremch.android.log.debugLog
 import com.caldremch.http.core.abs.ICommonRequestEventCallback

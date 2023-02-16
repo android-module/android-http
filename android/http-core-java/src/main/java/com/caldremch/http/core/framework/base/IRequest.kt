@@ -19,5 +19,5 @@ interface IRequest<R : IRequest<R>> {
     fun noCustomerHeader(): R
     fun catchError(errorBlock: IErrorCallback): R
     fun passiveCancelCallbackHandle():R
-    suspend fun <T> execute(cls: Class<T>): T?
+    suspend fun <T> execute(cls: Class<T>): IBaseResp<T>
 }

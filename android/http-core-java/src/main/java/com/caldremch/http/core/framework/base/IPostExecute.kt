@@ -10,9 +10,9 @@ import com.caldremch.http.core.framework.TransferStation
 interface IPostExecute : ICommonExecute<PostRequest?> {
     suspend fun <T> execute(
         postRequest: PostRequest,
-        transferStation: TransferStation,
+        ts: TransferStation,
         url: String,
-        callback: AbsCallback<T>?,
+        callback: AbsCallback<IBaseResp<T>>?,
         cls: Class<T>
-    ): T?
+    ): IBaseResp<T>
 }

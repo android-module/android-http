@@ -9,6 +9,7 @@ apply from: "../../versions.gradle"
 
 def versions_retrofit = "2.9.0"
 def versions_okhttp3 = "4.8.1"
+def coroutines_version = "1.6.4"
 dependencies {
     if(isRemote()){
         implementation "io.github.caldremch:android-http:$android_http_version"
@@ -17,11 +18,12 @@ dependencies {
     }
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:$versions_retrofit")
     implementation "io.github.caldremch:core-logger:$android_log_version"
     implementation("com.squareup.okhttp3:logging-interceptor:$versions_okhttp3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
 }
 
 ext {
@@ -69,4 +71,8 @@ afterEvaluate {
             }
         }
     }
+}
+
+test {
+    useJUnitPlatform()
 }

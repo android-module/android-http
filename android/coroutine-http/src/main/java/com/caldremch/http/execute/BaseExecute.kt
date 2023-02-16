@@ -8,8 +8,7 @@ import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.abs.IConvert
 import com.caldremch.http.core.abs.IHostConfig
 import com.caldremch.http.core.framework.TransferStation
-import com.caldremch.http.core.framework.handle.IDialogHandle
-import com.caldremch.http.core.framework.handle.IRequestHandle
+import com.caldremch.http.core.framework.base.IBaseResp
 import com.caldremch.http.exception.HostConfigErrorException
 import kotlinx.coroutines.CancellationException
 import okhttp3.ResponseBody
@@ -75,24 +74,15 @@ abstract class BaseExecute {
 
     }
 
-
-    fun <T> go(
-        callback: AbsCallback<T>?,
-        clazz: Class<T>,
-        dialogEvent: IDialogHandle?,
-        showDialog: Boolean,
-        dialogTips: String,
-        requestHandleEvent: IRequestHandle?,
-        showToast: Boolean
-    ): CoroutineHandler<T> {
+    fun <T> go(callback: AbsCallback<IBaseResp<T>>?,clazz: Class<T>,ts: TransferStation): CoroutineHandler<IBaseResp<T>> {
         return CoroutineHandler(
             callback,
             globalRequestEventCallback,
-            dialogEvent,
-            showDialog,
-            dialogTips,
-            requestHandleEvent,
-            showToast
+            ts.dialogHandle,
+            ts.showDialog,
+            ts.dialogTips,
+            ts.requestHandle,
+            ts.isShowToast
         )
 
     }

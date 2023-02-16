@@ -1,4 +1,4 @@
-package com.caldremch.android.coroutine.http.demo.impl
+package impl
 
 import com.caldremch.http.core.abs.IHostConfig
 import com.caldremch.http.core.abs.IServerUrlConfig
@@ -17,11 +17,11 @@ class HttpUrlConfigImpl : IServerUrlConfig {
         }
 
         override fun currentUrl(): String {
-            return "https://www.wanandroid.com/"
+            return "http://baidu.com/"
         }
 
         override fun defaultUrl(): String {
-            return "https://www.wanandroid.com/"
+            return "http://baidu.com/"
         }
 
     }

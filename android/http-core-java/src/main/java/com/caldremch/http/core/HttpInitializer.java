@@ -5,6 +5,8 @@ import com.caldremch.http.core.abs.IConvert;
 import com.caldremch.http.core.abs.IConvertStrategy;
 import com.caldremch.http.core.abs.IHeader;
 import com.caldremch.http.core.abs.IServerUrlConfig;
+import com.caldremch.http.core.framework.base.IBaseResp;
+import com.caldremch.http.core.framework.base.IBaseRespFactory;
 import com.caldremch.http.core.framework.base.IGetExecute;
 import com.caldremch.http.core.framework.base.IPostExecute;
 
@@ -46,9 +48,12 @@ public class HttpInitializer {
 
     private static class InitData {
         private Class<? extends IHeader> headerClz;
+        private Class<? extends IBaseRespFactory> baseRespFactoryClz;
         private Class<? extends ICommonRequestEventCallback> requestEventClz;
         private Class<? extends IConvertStrategy> convertStrategyClz;
         private Class<? extends IServerUrlConfig> serverUrlConfigClz;
+
+
 
         public void neededCheck() {
 
@@ -67,6 +72,10 @@ public class HttpInitializer {
             if (serverUrlConfigClz == null) {
                 throw new NullPointerException("IServerUrlConfig is needed");
             }
+
+            if (baseRespFactoryClz == null) {
+                throw new NullPointerException("IBaseRespFactory is needed");
+            }
         }
     }
 
@@ -77,6 +86,10 @@ public class HttpInitializer {
 
     public static @NotNull IHeader getHeader() {
         return getInstanceSingleOf(sInitData.headerClz);
+    }
+
+    public static @NotNull IBaseRespFactory getBaseRespFactory() {
+        return getInstanceSingleOf(sInitData.baseRespFactoryClz);
     }
 
     public static @NotNull ICommonRequestEventCallback getRequestEventCallback() {
@@ -127,6 +140,12 @@ public class HttpInitializer {
             initData.headerClz = headerClz;
             return this;
         }
+
+        public Builder registerBaseRespFactory(Class<? extends IBaseRespFactory> baseRespFactory) {
+            initData.baseRespFactoryClz = baseRespFactory;
+            return this;
+        }
+
 
         public Builder registerRequestEventCallback(Class<? extends ICommonRequestEventCallback> requestEventClz) {
             initData.requestEventClz = requestEventClz;

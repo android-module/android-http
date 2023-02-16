@@ -2,11 +2,14 @@ package com.caldremch.android.coroutine.http.demo
 
 import com.caldremch.android.coroutine.http.demo.biz.ApiConstant
 import com.caldremch.android.coroutine.http.demo.biz.UserInfoResp
+import com.caldremch.android.coroutine.http.demo.impl.BaseRespFactoryImpl
 import com.caldremch.android.coroutine.http.demo.impl.ConvertStrategyImpl
 import com.caldremch.android.coroutine.http.demo.impl.HttpCommonHeaderImpl
 import com.caldremch.android.coroutine.http.demo.impl.HttpObsHandlerImpl
 import com.caldremch.android.coroutine.http.demo.impl.HttpUrlConfigImpl
+import com.caldremch.android.coroutine.http.demo.model.LoginInfoResp
 import com.caldremch.android.log.DebugLogInitializer
+import com.caldremch.android.log.debugLog
 import com.caldremch.android.log.errorLog
 import com.caldremch.http.core.HttpInitializer
 import com.caldremch.http.core.HttpManager
@@ -29,6 +32,7 @@ fun initHttp() {
     //使用者初始化
     HttpInitializer.Builder()
         .registerHeader(HttpCommonHeaderImpl::class.java)
+        .registerBaseRespFactory(BaseRespFactoryImpl::class.java)
         .registerRequestEventCallback(HttpObsHandlerImpl::class.java)
         .registerServerUrlConfig(HttpUrlConfigImpl::class.java)
         .registerConvertStrategy(ConvertStrategyImpl::class.java)
@@ -48,13 +52,21 @@ fun startRequest() {
 //    }
 
     val loginJob = scope.launch {
-        val resp = HttpManager.get(ApiConstant.login)
-            .channel(3)
+        val resp = HttpManager.post(ApiConstant.login)
+            .formUrlEncoded()
+            .put("username", "Caldremch2")
+            .put("password", "123456")
             .passiveCancelCallbackHandle()
             .catchError {
-                errorLog { "my error callback2: ${it?.message}  $it" }
+                errorLog { "拦截的回调: ${it?.message}  $it" }
             }
-            .execute(UserInfoResp::class.java)
+            .execute(LoginInfoResp::class.java)
+
+        if (resp.isSuccess()){
+            debugLog { "成功: ${resp.isSuccess()} --> ${resp.getData()?.username}" }
+        }else{
+            debugLog { "错误: ${resp.isSuccess()} --> ${resp.getErrorMsg()}" }
+        }
     }
 
     GlobalScope.launch {

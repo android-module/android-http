@@ -1,59 +1,50 @@
 package com.caldremch.http.execute
 
-import com.caldremch.http.CoroutineHandler
+import com.caldremch.http.core.HttpInitializer
 import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.framework.GetRequest
 import com.caldremch.http.core.framework.TransferStation
+import com.caldremch.http.core.framework.base.IBaseResp
 import com.caldremch.http.core.framework.base.IGetExecute
 import com.caldremch.http.core.model.ResponseBodyWrapper
-import kotlinx.coroutines.CancellableContinuation
-import kotlinx.coroutines.suspendCancellableCoroutine
 
 
 class GetExecuteImpl : BaseExecute(), IGetExecute {
 
     override suspend fun <T : Any?> execute(
         getRequest: GetRequest,
-        transferStation: TransferStation,
+        ts: TransferStation,
         url: String,
-        callback: AbsCallback<T>?,
+        callback: AbsCallback<IBaseResp<T>>?,
         clazz: Class<T>
-    ): T? {
-        val httpPath = transferStation.httpPath
-        val noCustomerHeader = transferStation.noCustomerHeader
-        val showDialog = transferStation.showDialog
-        val dialogTips = transferStation.dialogTips
-        val dialogHandle = transferStation.dialogHandle
-        val requestHandle = transferStation.requestHandle
-        val isShowToast = transferStation.isShowToast
+    ): IBaseResp<T> {
+        val httpPath = ts.httpPath
+        val noCustomerHeader = ts.noCustomerHeader
         val pathUrl = if (httpPath.isEmpty) url else httpPath.getPathUrl(url)
-
         val handler = go(
             callback,
-            clazz,
-            dialogHandle, showDialog, dialogTips, requestHandle,
-            isShowToast
+            clazz,ts
         )
-        var convertResult: T? = null
+        var convertResult: IBaseResp<T>
         try {
-            if (transferStation.httpParams.isEmpty) {
-                val resp = getApi(noCustomerHeader, transferStation.channel).get(pathUrl)
+            if (ts.httpParams.isEmpty) {
+                val resp = getApi(noCustomerHeader, ts.channel).get(pathUrl)
                 convertResult = convert.convert(ResponseBodyWrapper(resp), clazz)
                 handler.onSuccess(convertResult)
             } else {
-                val resp = getApi(noCustomerHeader, transferStation.channel).get(
+                val resp = getApi(noCustomerHeader, ts.channel).get(
                     pathUrl,
-                    transferStation.httpParams.urlParams
+                    ts.httpParams.urlParams
                 )
                 convertResult = convert.convert(ResponseBodyWrapper(resp), clazz)
                 handler.onSuccess(convertResult)
             }
         } catch (e: Exception) {
-            handleException(e, transferStation, handler)
+            convertResult = HttpInitializer.getBaseRespFactory().create(null,  e.findCode(),e.message, null,e.findCode()?.toString())
+            handleException(e, ts, handler)
         }
         return convertResult
     }
-
 
 
 

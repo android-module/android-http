@@ -4,7 +4,6 @@ import com.caldremch.http.core.abs.AbsCallback
 import com.caldremch.http.core.abs.ICommonRequestEventCallback
 import com.caldremch.http.core.framework.handle.IDialogHandle
 import com.caldremch.http.core.framework.handle.IRequestHandle
-import com.caldremch.http.exception.NullDataSuccessException
 
 /**
  *
@@ -17,7 +16,9 @@ import com.caldremch.http.exception.NullDataSuccessException
  * @describe handle data
  *
  **/
- class CoroutineHandler<T>(
+
+
+  class CoroutineHandler<T>(
     private val callback: AbsCallback<T>?,
     private val commonRequestEvent: ICommonRequestEventCallback?,
     private val dialogEvent: IDialogHandle?,
@@ -49,14 +50,14 @@ import com.caldremch.http.exception.NullDataSuccessException
             dialogEvent?.dialogDismissTiming()
         }
 
-        /**
-         * code is 200, but null T ,[AbsCallback.onSuccess] callback
-         */
-        if (e is NullDataSuccessException) {
-            callback?.onSuccess(null)
-            commonRequestEvent?.onEnd()
-            return
-        }
+//        /**
+//         * code is 200, but null T ,[AbsCallback.onSuccess] callback
+//         */
+//        if (e is NullDataSuccessException) {
+//            callback?.onSuccess(null)
+//            commonRequestEvent?.onEnd()
+//            return
+//        }
 
         callback?.onError(e)
         commonRequestEvent?.onError(e, showToast)

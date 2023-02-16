@@ -11,6 +11,5 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         DebugLogInitializer.initWithDetect(true)
-        HttpInitializer.init(MyHttpInit())
     }
 }

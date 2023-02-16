@@ -3,6 +3,7 @@ package com.caldremch.http.impl
 
 import com.caldremch.http.core.HttpInitializer
 import com.caldremch.http.core.abs.IConvert
+import com.caldremch.http.core.framework.base.IBaseResp
 import com.caldremch.http.core.model.ResponseBodyWrapper
 import okhttp3.ResponseBody
 
@@ -14,9 +15,10 @@ class HttpConvertImpl : IConvert<ResponseBody> {
 
     private val convertStrategy  = HttpInitializer.getConvertStrategy();
 
+
     override fun <T> convert(
         responseBodyWrapper: ResponseBodyWrapper<ResponseBody>, clz: Class<T>
-    ): T {
+    ): IBaseResp<T> {
         val responseBody = responseBodyWrapper.responseBody
 
         if(convertStrategy.isStreamConvert(clz)){
