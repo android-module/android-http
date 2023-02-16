@@ -18,6 +18,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
+import java.lang.reflect.Type
 
 class PostExecuteImpl : BaseExecute(), IPostExecute {
 
@@ -40,9 +41,19 @@ class PostExecuteImpl : BaseExecute(), IPostExecute {
         callback: AbsCallback<IBaseResp<T>>?,
         clazz: Class<T>
     ): IBaseResp<T> {
+        return executeType(request, ts, url, callback, clazz)
+    }
+
+    override suspend fun <T> executeType(
+        postRequest: PostRequest,
+        ts: TransferStation,
+        url: String,
+        callback: AbsCallback<IBaseResp<T>>?,
+        clazz: Type
+    ): IBaseResp<T> {
         val pathUrl = if (ts.httpPath.isEmpty) url else ts.httpPath.getPathUrl(url)
         val api = getApi(ts.noCustomerHeader, ts.channel)
-        val handler = go(callback, clazz,ts)
+        val handler = go(callback, ts)
         var convertResult: IBaseResp<T>
         try {
             val resp = getResponse(ts, api, pathUrl)

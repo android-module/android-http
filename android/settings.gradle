@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Http"
-include ':app'
+//include ':app'
 include ':coroutine-http'
 include ':coroutine-http-demo'
 include ':coroutine-http-android'

@@ -11,6 +11,7 @@ import com.google.gson.JsonParseException
 import com.google.gson.JsonParser
 import java.io.File
 import java.io.InputStream
+import java.lang.reflect.Type
 
 /**
  * Created by Leon on 2022/8/11.
@@ -21,7 +22,7 @@ class ConvertStrategyImpl : IConvertStrategy {
     private val mParser = JsonParser()
     private val baseRespFactory=HttpInitializer.getBaseRespFactory()
 
-    override fun <T> isStreamConvert(clz: Class<T>): Boolean {
+    override fun <T> isStreamConvert(clz: Type): Boolean {
         return clz == File::class.java
     }
 
@@ -30,7 +31,7 @@ class ConvertStrategyImpl : IConvertStrategy {
     }
 
     //有任何异常, 直接抛出来
-    override fun <T> convertCommon(bodyString: String, clz: Class<T>): IBaseResp<T> {
+    override fun <T> convertCommon(bodyString: String, clz: Type): IBaseResp<T> {
         var ret: IBaseResp<T>? = null
         try {
             //这里的数据结构要根据后台的来处理具体的字段类型, 不做兼容, 后台一定要规范

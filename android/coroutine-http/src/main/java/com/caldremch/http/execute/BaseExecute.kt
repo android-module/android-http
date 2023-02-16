@@ -74,7 +74,7 @@ abstract class BaseExecute {
 
     }
 
-    fun <T> go(callback: AbsCallback<IBaseResp<T>>?,clazz: Class<T>,ts: TransferStation): CoroutineHandler<IBaseResp<T>> {
+    fun <T> go(callback: AbsCallback<IBaseResp<T>>?,ts: TransferStation): CoroutineHandler<IBaseResp<T>> {
         return CoroutineHandler(
             callback,
             globalRequestEventCallback,

@@ -6,6 +6,7 @@ import com.caldremch.http.core.abs.IConvert
 import com.caldremch.http.core.framework.base.IBaseResp
 import com.caldremch.http.core.model.ResponseBodyWrapper
 import okhttp3.ResponseBody
+import java.lang.reflect.Type
 
 
 /**
@@ -17,11 +18,11 @@ class HttpConvertImpl : IConvert<ResponseBody> {
 
 
     override fun <T> convert(
-        responseBodyWrapper: ResponseBodyWrapper<ResponseBody>, clz: Class<T>
+        responseBodyWrapper: ResponseBodyWrapper<ResponseBody>,  clz:Type
     ): IBaseResp<T> {
         val responseBody = responseBodyWrapper.responseBody
 
-        if(convertStrategy.isStreamConvert(clz)){
+        if(convertStrategy.isStreamConvert<T>(clz)){
             return convertStrategy.convertStream(responseBody.byteStream())
         }
         responseBody.use {
