@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+apply from: "${rootDir}/../versions.gradle"
+
+android {
+    namespace 'com.caldremch.android.http.coroutine'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation(project(":http-core"))
+    implementation(project(":http-coroutine"))
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+
+ext {
+    libraryName = "http-coroutine-android"
+    myLibraryVersion = http_coroutine_version
+    myBintrayName = "http-coroutine-android"
+    myArtifactId = myBintrayName
+    myLibraryName = "http-coroutine-android"
+    myLibraryDescription = "http coroutine android"
+}
+
+publishMavenConfig(project)

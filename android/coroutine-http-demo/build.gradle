@@ -8,8 +8,8 @@ apply from: "../../versions.gradle"
 
 dependencies {
     implementation "io.github.caldremch:core-logger:$android_log_version"
-    implementation project(":http-core-java")
-    api (project(":coroutine-http"))
+    implementation project(":http-core")
+    api (project(":http-coroutine"))
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
@@ -45,4 +45,5 @@ if (isIdea.toBoolean()) {
 }
 
 
-//apply from: "../gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
+
+

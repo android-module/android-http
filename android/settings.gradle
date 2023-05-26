@@ -1,5 +1,21 @@
 pluginManagement {
     repositories {
+        def isInChina = providers.gradleProperty("loc.china")
+        if(isInChina != null){
+            maven {
+                url 'https://maven.aliyun.com/repository/central'
+            }
+            maven {
+                url 'https://maven.aliyun.com/repository/google'
+            }
+            maven {
+                url 'https://maven.aliyun.com/repository/gradle-plugin'
+            }
+
+            maven{
+                url 'https://maven.aliyun.com/repository/jcenter'
+            }
+        }
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -8,13 +24,26 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        def isInChina = providers.gradleProperty("loc.china")
+        if(isInChina != null){
+            maven {
+                url 'https://maven.aliyun.com/repository/central'
+            }
+            maven {
+                url 'https://maven.aliyun.com/repository/google'
+            }
+
+            maven {
+                url 'https://maven.aliyun.com/repository/jcenter'
+            }
+        }
         google()
         mavenCentral()
     }
 }
 rootProject.name = "Http"
 //include ':app'
-include ':coroutine-http'
+include ':http-coroutine'
 include ':coroutine-http-demo'
-include ':coroutine-http-android'
-include ':http-core-java'
+include ':http-coroutine-android'
+include ':http-core'
