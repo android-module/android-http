@@ -1,21 +1,32 @@
-
-def isRemote(){
+def isRemote() {
     def what = false
-    if(project.hasProperty("remoteDep")){
+    if (project.hasProperty("remoteDep")) {
         what = remoteDep.toBoolean()
     }
     return what
 }
 
-ext{
-    isRemote=this.&isRemote
+def publishMavenConfig(Project project) {
+    def publishPath = "${project.rootDir}/gradle-maven-kotlin-dsl/mavencentral-with-maven-publish.gradle"
+    def publishFile = new File(publishPath)
+    if (publishFile.exists()) {
+        apply from: "$publishPath"
+    }
 }
 
-project.ext{
-    remoteDep=false
-    android_log_version="1.0.7"
-    android_http_version="1.2.2"
-    android_http_impl_version="1.0.1"
-    coroutine_http_impl_version="1.0.0-rc1"
+
+ext {
+    isRemote = this.&isRemote
+    publishMavenConfig = this.&publishMavenConfig
+}
+
+project.ext {
+    android_log_version = "1.0.7"
+    android_http_version = "1.2.2"
+    android_http_impl_version = "1.0.1"
+    coroutine_http_impl_version = "1.0.0-rc1"
+    http_core_version = "2.0.0-rc1"
+    http_coroutine_version = "2.0.0-rc1"
+    http_coroutine_android_version = "2.0.0-rc1"
 }
 

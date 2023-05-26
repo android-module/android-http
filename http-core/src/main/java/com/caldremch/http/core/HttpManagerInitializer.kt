@@ -3,6 +3,7 @@ package com.caldremch.http.core
 import com.caldremch.http.core.framework.PostRequest
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
+import org.koin.java.KoinJavaComponent
 
 /**
  * Created by Leon on 2022/7/7
@@ -24,15 +25,21 @@ object HttpManagerInitializer{
      * [iHttpInit] 一般为业务所所需要初始化的模块
      */
     fun init(iHttpInit: IHttpInit){
-        startKoin {
-            iHttpInitClasses.forEach {
-                try {
-                    loadKoinModules(it.newInstance().onLoaderCreate())
-                }catch (e:Exception){
-                    e.printStackTrace()
-                }
-            }
-            modules(iHttpInit.onLoaderCreate())
+        try {
+            KoinJavaComponent.getKoin()
+        }catch (e:IllegalStateException){
+            startKoin {  }
         }
+        val koin =  KoinJavaComponent.getKoin()
+        iHttpInitClasses.forEach {
+            try {
+                KoinJavaComponent.getKoin().loadModules(
+                    arrayListOf(it.newInstance().onLoaderCreate())
+                )
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+        koin.loadModules(arrayListOf(iHttpInit.onLoaderCreate()))
     }
 }

@@ -1,0 +1,49 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+
+apply from: "../../versions.gradle"
+
+dependencies {
+    implementation "io.github.caldremch:core-logger:$android_log_version"
+    implementation project(":http-core")
+    api (project(":http-coroutine"))
+    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // Use the Kotlin test library.
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    // Use the Kotlin JUnit integration.
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+//    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("io.mockk:mockk:1.13.4")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+if (isIdea.toBoolean()) {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+}
+
+
+
+
