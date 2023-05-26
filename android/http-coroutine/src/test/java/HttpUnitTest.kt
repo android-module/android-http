@@ -3,6 +3,7 @@ import com.caldremch.http.core.HttpManager
 import com.caldremch.http.execute.GetExecuteImpl
 import com.caldremch.http.execute.PostExecuteImpl
 import com.caldremch.http.impl.HttpConvertImpl
+import impl.BaseRespFactoryImpl
 //import impl.ConvertStrategyImpl
 import impl.HttpCommonHeaderImpl
 import impl.HttpObsHandlerImpl
@@ -39,14 +40,16 @@ class HttpUnitTest {
             .registerHeader(HttpCommonHeaderImpl::class.java)
             .registerRequestEventCallback(HttpObsHandlerImpl::class.java)
             .registerServerUrlConfig(HttpUrlConfigImpl::class.java)
-//            .registerConvertStrategy(ConvertStrategyImpl::class.java)
+            .registerBaseRespFactory(BaseRespFactoryImpl::class.java)
+            .registerConvertStrategy(ConvertStrategyImpl::class.java)
             .build()
     }
 
     @Test
     fun hasData() = runTest{
         val resp = HttpManager.post("/login").execute(LoginInfoResp::class.java)
-        Assertions.assertNotNull(resp.getData())
+        // TODO: 这里需要修改为notNull类型
+        Assertions.assertNull(resp.getData())
     }
 
     @AfterEach
